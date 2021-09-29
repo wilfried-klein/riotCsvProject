@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>obtenir Mastery des Champions</title>
+</head>
+<body>
+<h2> Renvoie la maîtrise d'un champion en fonction de son championId </h2>
+<form method="post" action="champMasteryByAccountId.php">
+  <fieldset>
+    <p>
+      <label for="summonerName_id">Nom d'invocateur </label> :
+      <input type="text" placeholder="Faker" name="summonerName" id="summonerName_id" required/>
+    </p>
+    <p>
+      <label for="champion_id">Id du champion</label> :
+      <input type="text" placeholder="1, 2, 3, " name="championid" id="champion_id" required/>
+    </p>
+    <p>
+      <input type="submit" value="Envoyer">
+    </p>
+  </fieldset>
+</form>
+
+
+</body>
+</html>
