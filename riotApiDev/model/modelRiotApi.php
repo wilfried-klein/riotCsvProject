@@ -1,4 +1,8 @@
 <?php
+
+
+	//il faudra penser a ajouter une fonction pur obtenir la $region suivant le $server car il n'existe (a priori) pas de requetes.
+
 	class ModelRiotApi{
 		private static $api_key = "RGAPI-d1b01cff-22ad-4ff1-b3b8-117df0ab7cdb";
 
@@ -192,13 +196,123 @@
 			return ModelRiotApi::jsonGetter($url);
 		}
 
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		//DDRAGON-API
 		//REQUETES VERS DDRAGON
-		//À COMPLÉTER
 		//POUR LES OBJET, RUNES...
-		//https://developer.riotgames.com/docs/lol#data-dragon
+
+		//https://developer.riotgames.com/docs/lol#general_game-constants
+		public static function getSeasonsData(){
+			$url = "https://static.developer.riotgames.com/docs/lol/seasons.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		public static function getQueuesData(){
+			$url = "https://static.developer.riotgames.com/docs/lol/queues.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		public static function getMapsData(){
+			$url = "https://static.developer.riotgames.com/docs/lol/maps.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		public static function getGameModesData(){
+			$url = "https://static.developer.riotgames.com/docs/lol/gameModes.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		public static function getGameTypesData(){
+			$url = "https://static.developer.riotgames.com/docs/lol/gameTypes.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//https://developer.riotgames.com/docs/lol#data-dragon_versions
+		public static function getVersionData(){
+			$url = "https://ddragon.leagueoflegends.com/api/versions.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//https://developer.riotgames.com/docs/lol#data-dragon_regions
+		public static function getRegionData($server){
+			$url = "https://ddragon.leagueoflegends.com/realms/". $server . ".json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//https://developer.riotgames.com/docs/lol#data-dragon_data-assets
+		public static function getLanguagesData(){
+			$url = "https://ddragon.leagueoflegends.com/cdn/languages.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//https://developer.riotgames.com/docs/lol#data-dragon_champions
+		//for champions with space or apostrophe just delete it (ex: Xin Zhao => XinZhao)
+		//when need champion Name add uppercase on first letter (ex: jhin => Jhin);
+		public static function getAllChampionsData($version, $language){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/champion.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		public static function getChampionData($championName){
+			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/champion/" . $championName . ".json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//return image
+		public static function getChampionSplashAsset($championName,$skinNum){
+			$url = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . $championName . "_" . $skinNum . ".jpg";
+			return base64_encode(file_get_contents($url));
+		}
+		//return image
+		public static function getChampionLoadingScreenAsset($championName, $skinNum){
+			$url = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/" . $championName . "_" . $skinNum . ".jpg";
+			return base64_encode(file_get_contents($url));
+		}
+		//return image
+		public static function getChampionSquareAsset($version,$championName){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/champion/" . $championName . ".png";
+			return base64_encode(file_get_contents($url));
+		}
+		//return image
+		public static function getPassiveAsset($version,$imageName){
+			$url = "https://ddragon.leagueoflegends.com/cdn/11.19.1/img/passive/" . $imageName;
+			return base64_encode(file_get_contents($url));
+		}
+		public static function getAbilityAsset($version,$imageName){
+			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/img/spell/" . $imageName;
+			return base64_encode(file_get_contents($url));
+		}
+		//return image
+		//https://developer.riotgames.com/docs/lol#data-dragon_items
+		public static function getItemsData($version,$language){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/item.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//return image
+		public static function getItemAsset($version,$itemID){
+			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/img/item/" . $itemID . ".png";
+			return base64_encode(file_get_contents($url));
+		}
+		//https://developer.riotgames.com/docs/lol#data-dragon_other
+		public static function getSummonerSpellsData($version,$language){
+			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/summoner.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//return image
+		public static function getSummonerSpellAsset($version,$imageName){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/spell/" . $imageName;
+			return base64_encode(file_get_contents($url));
+		}
+		public static function getProfileIconData($version,$imageName){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/profileicon.json";
+			return ModelRiotApi::jsonGetter($url);
+		}
+		//return image
+		public static function getProfileIconAsset($version,$iconID){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/profileicon/" . $iconID . ".png";
+			return base64_encode(file_get_contents($url));
+		}
+		//return image
+		public static function getMiniMapAsset($version,$miniMapID){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/map/map" . $miniMapID . ".png";
+			return base64_encode(file_get_contents($url));
+		}
+		//return image
+		public static function getSprite($version,$spriteName){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/sprite/" . $spriteName;
+			return base64_encode(file_get_contents($url));
+		}
 	}
-
-
-
 ?>

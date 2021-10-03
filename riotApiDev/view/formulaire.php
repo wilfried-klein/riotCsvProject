@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h2> Renvoie vos statistiques de votre dernier match </h2>
-	<form method="post" action="../controller/controllerTest.php">
+	<form method="post" action="../controller/controllerLastGameInfo.php">
 		<fieldset>
 			<input type="text" placeholder="Nom d'invocateur" name="summonerName" id="summonerName_id" required/>
 			<select name="server" id="server_id">
