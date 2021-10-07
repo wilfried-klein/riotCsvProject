@@ -319,7 +319,16 @@
 		//IMPORTANT !!!
 		//$tier in lowercase and $rank in arab number  (GOLD IV => gold  4)
 		public static function getRankedEmblems($tier,$rank){
-			$url = "https://ddragon.bangingheads.net/other/emblems/" . $tier . "_" . $rank . ".png";
+			if($rank = 'I'){
+				$rank = 1;
+			}elseif ($rank = 'II') {
+				$rank = 2;
+			}elseif($rank = 'III'){
+				$rank = 3;
+			}elseif($rank = 'IV'){
+				$rank = 4;
+			}
+			$url = "https://ddragon.bangingheads.net/other/emblems/" . strtolower($tier) . "_" . $rank . ".png";
 			return base64_encode(file_get_contents($url));
 		}
 	}
