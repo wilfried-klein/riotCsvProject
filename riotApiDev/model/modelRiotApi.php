@@ -9,9 +9,30 @@
 	//suppresion de la fonction jsonGetter()
 	//la fonction ne faisant qu'une seul ligne je l'ai mise dans chaque getter
 
-	class ModelRiotApi{
-		private static $api_key = "RGAPI-d1b01cff-22ad-4ff1-b3b8-117df0ab7cdb";
+	//The AMERICAS routing value serves NA, BR, LAN, LAS, and OCE. The ASIA routing value serves KR and JP. The EUROPE routing value serves EUNE, EUW, TR, and RU.
 
+	//fonctionnement de matchV5/timeline :
+	//a chaque minute de la partie le jeu crée un nouveau "participantFrames" plus un au début et un a la fin donc un total de (durée de la partie en minute + 2),
+	//entre chaque participantFrames un tableau d'event est crée ou a chaque evenement (liste a definir) en jeu indique sont type, sont horodatage (en milliseconde) et les info le concernants
+	//les métadonnées sont au début et indique la liste des participants
+	//l'id correspondant au joueur sont a la fin.
+
+class ModelRiotApi{
+	private static $api_key = "RGAPI-d1b01cff-22ad-4ff1-b3b8-117df0ab7cdb";
+
+	private static $ServerRegionEquivalence = array(
+		'na1'  => 'americas',
+		'br1'  => 'americas',
+		'la1'  => 'americas',
+		'la2'  => 'americas',
+		'oc1'  => 'americas',
+		'kr'   => 'asia',
+		'jp1'  => 'asia',
+		'eun1' => 'europe',
+		'euw1' => 'europe',
+		'tr1'  => 'europe',
+		'ru'   => 'europe',
+	);
 
 		//PARTIE 'CONF' EN MODÈLE MVC
 
@@ -28,41 +49,52 @@
 		//for matchv5/bypuid
 		$type = {ranked,normal,tourney,tutorial}
 		*/
-
+		private static function doHttpRequest($url){
+			$response = file_get_contents($url);
+			if($response == false){
+				throw new Exception("404");
+			}else{
+				$responseCode = substr(get_headers($url)[0], 9, 3);
+				if($responseCode != "200"){
+					throw new Exception($responseCode);
+				}else{
+					return $response;
+				}
+			}
+		}
 		//CHAMPION-V3
 		//lol/platform/v3/champions-rotations
 		//obtenir la rotation des champions actuel
 		//retourne un array
 		public static function getChampRotationbyServer($server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/platform/v3/champion-rotations?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
-
 		//SUMMONER-V4
 		//obtenir les informations d'un invocateur
 		//lol/summoner/v4/summoners/by-account
 		//retourne un array
 		public static function getSummonnerInfoByAccountId($accountID, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/summoner/v4/summoners/by-account/" . $accountID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/summoner/v4/summoners
 		//retourne un array
 		public static function getSummonnerInfoBySummonerId($summonerID, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/summoner/v4/summoners/" . $summonerID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/summoner/v4/summoners/by-name
 		//retourne un array
 		public static function getSummonerInfoBySummonerName($summonerName,$server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $summonerName .  "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/summoner/v4/summoners/by-puuid
 		//retourne un array
 		public static function getSummonerInfoByPuuid($summonerPuuid, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" . $summonerPuuid . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 
 		//CHAMPION-MASTERY-V4
@@ -71,21 +103,21 @@
 		//retourne un array
 		public static function getChampionMasteryBySummonerId($summonerID, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" . $summonerID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/champion-mastery/v4/champion-masteries/by-summoner/by-champion
 		//obtenir les informations des maitrise de champions d'un invocateur suivant l'ID du champion
 		//retourne un array
 		public static function getChampionMasteryBySummonerIdAndChampionId($summonerID, $championId, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" . $summonerID . "/by-champion/" . $championId . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true); 
+			return json_decode(ModelRiotApi::doHttpRequest($url), true); 
 		}
 		//lol/champion-mastery/v4/scores/by-summoner
 		//obtenir le nombre total de point de maitrise d'un invocateur
 		//retourne un int
 		public static function getChampionMasteryScoreBySummonerId($summonerID, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/" . $summonerID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 
 		//SPECTATOR-V4
@@ -95,14 +127,14 @@
 		//retourne un array
 		public static function getDirectMatchDataBySummonerId($summonerID, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $summonerID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/spectator/v4/featured-games
 		//retourne la liste des partie "en vedette" par serveur
 		//retourne un array
 		public static function getFeaturedGamesByServer($server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/spectator/v4/featured-games?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 
 		}
 
@@ -112,7 +144,7 @@
 		//retourne un array
 		public static function getThirdPartyCodebySummonerId($summonerID,$server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/platform/v4/third-party-code/by-summoner/" . $summonerID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 
 		//LEAGUE-V4
@@ -121,42 +153,42 @@
 		//retourne un array
 		public static function getChallengersListByQueueAndServer($queue, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/league/v4/challengerleagues/by-queue/" . $queue . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/league/v4/leagues/
 		//obtenir la liste des joueur suivant l'ID de la ligue
 		//retourne un array
 		public static function getSummonerListByLeagueIdAndServer($leagueID, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/league/v4/leagues/" . $leagueID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/league/v4/masterleagues/by-queue/
 		//obtenir la liste des challengers et les informations de classement de chaque joueur
 		//retourne un array
 		public static function getMasterListByQueueAndServer($queue, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/league/v4/masterleagues/by-queue/" . $queue . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/league/v4/grandmasterleagues/by-queue
 		//obtenir la liste des grandmaster et les informations de classement de chaque joueur
 		//retourne un array
 		public static function getGrandmasterListByQueueAndServer($queue, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/" . $queue . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/league/v4/entries/by-summoner
 		//obtenir les informations de classement a propos d'un joueur
 		//retourne un array
 		public static function getLeagueDatabySummonerId($summonerID, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/league/v4/entries/by-summoner/" . $summonerID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/league/v4/entries/
 		//obtenir la liste des joueur suivant la file,le rang et la division
 		//retourne un array
 		public static function getSummonersInfoByQueueTierAndDivision($queue,$tier,$division,$server,$page=1){
 			$url = "https://" . $server . ".api.riotgames.com/lol/league/v4/entries/" . $queue . "/" . $tier . "/" . $division . "?page=" . $page . "&api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//MATCH-V5
 		//lol/match/v5/matches/
@@ -164,7 +196,7 @@
 		//retourne un array
 		public static function getMatchData($matchID,$region){
 			$url = "https://" . $region . ".api.riotgames.com/lol/match/v5/matches/" . $matchID . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/match/v5/matches/by-puuid/
 		//obtenir la liste des matchs d'un invocateur
@@ -177,14 +209,14 @@
 		//valid value for type = {ranked,normal,tourney,tutorial}
 		public static function getMatchByPuuid($summonerPuuid,$region,$startTime=null,$endTime=null,$queue=null,$type=null,$start=null,$count=null){
 			$url = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" . $summonerPuuid . "/ids?startTime=" . $startTime . "&endTime=" . $endTime . "&queue=" . $queue . "&type=" . $type . "&start=" . $start . "&count=" . $count . "&api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true); 
+			return json_decode(ModelRiotApi::doHttpRequest($url), true); 
 		}
 		//lol/match/v5/matches/timeline
 		//obtenir les données a propos des envenement au cours d'une partie
 		//retourne un array
 		public static function getMatchTimeline($matchID,$region){
 			$url = "https://" . $region . ".api.riotgames.com/lol/match/v5/matches/" . $matchID . "/timeline?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 
 
@@ -197,139 +229,152 @@
 		//https://developer.riotgames.com/docs/lol#general_game-constants
 		public static function getSeasonsData(){
 			$url = "https://static.developer.riotgames.com/docs/lol/seasons.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		public static function getQueuesData(){
 			$url = "https://static.developer.riotgames.com/docs/lol/queues.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		public static function getMapsData(){
 			$url = "https://static.developer.riotgames.com/docs/lol/maps.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		public static function getGameModesData(){
 			$url = "https://static.developer.riotgames.com/docs/lol/gameModes.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		public static function getGameTypesData(){
 			$url = "https://static.developer.riotgames.com/docs/lol/gameTypes.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//https://developer.riotgames.com/docs/lol#data-dragon_versions
 		public static function getVersionData(){
 			$url = "https://ddragon.leagueoflegends.com/api/versions.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//https://developer.riotgames.com/docs/lol#data-dragon_regions
 		public static function getRegionData($server){
 			$url = "https://ddragon.leagueoflegends.com/realms/". $server . ".json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//https://developer.riotgames.com/docs/lol#data-dragon_data-assets
 		public static function getLanguagesData(){
 			$url = "https://ddragon.leagueoflegends.com/cdn/languages.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//https://developer.riotgames.com/docs/lol#data-dragon_champions
 		//for champions with space or apostrophe just delete it (ex: Xin Zhao => XinZhao)
 		//when need champion Name add uppercase on first letter (ex: jhin => Jhin);
 		public static function getAllChampionsData($version, $language){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/champion.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		public static function getChampionData($championName){
 			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/champion/" . $championName . ".json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//return image
 		public static function getChampionSplashAsset($championName,$skinNum){
 			$url = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . $championName . "_" . $skinNum . ".jpg";
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return image
 		public static function getChampionLoadingScreenAsset($championName, $skinNum){
 			$url = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/" . $championName . "_" . $skinNum . ".jpg";
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return image
 		public static function getChampionSquareAsset($version,$championName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/champion/" . $championName . ".png";
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return image
 		public static function getPassiveAsset($version,$imageName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/11.19.1/img/passive/" . $imageName;
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		public static function getAbilityAsset($version,$imageName){
 			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/img/spell/" . $imageName;
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return image
 		//https://developer.riotgames.com/docs/lol#data-dragon_items
 		public static function getItemsData($version,$language){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/item.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
-		//return image
+		//return image 
 		public static function getItemAsset($version,$itemID){
 			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/img/item/" . $itemID . ".png";
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//https://developer.riotgames.com/docs/lol#data-dragon_other
 		public static function getSummonerSpellsData($version,$language){
 			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/summoner.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//return image
 		public static function getSummonerSpellAsset($version,$imageName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/spell/" . $imageName;
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return array
 		public static function getProfileIconData($version,$imageName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/profileicon.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//return image
 		public static function getProfileIconAsset($version,$iconID){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/profileicon/" . $iconID . ".png";
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return array
 		public static function getRunesData($version,$language){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language  . "/runesReforged.json";
-			return json_decode(file_get_contents($url), true);
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//return image
 		public static function getRunesAsset($iconPath){
 			$url = "https://ddragon.leagueoflegends.com/cdn/img/" . $iconPath;
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return image
 		public static function getMiniMapAsset($version,$miniMapID){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/map/map" . $miniMapID . ".png";
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//return image
 		public static function getSprite($version,$spriteName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/sprite/" . $spriteName;
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
 		}
 		//IMPORTANT !!!
 		//$tier in lowercase and $rank in arab number  (GOLD IV => gold  4)
 		public static function getRankedEmblems($tier,$rank){
-			if($rank = 'I'){
-				$rank = 1;
-			}elseif ($rank = 'II') {
-				$rank = 2;
-			}elseif($rank = 'III'){
-				$rank = 3;
-			}elseif($rank = 'IV'){
-				$rank = 4;
-			}
+			if($rank=="I"){
+				$rank="1";
+			}if($rank=="II"){
+				$rank="2";
+			}if($rank=="III"){
+				$rank="3";
+			}if($rank=="IV"){
+				$rank="4";
+			};
 			$url = "https://ddragon.bangingheads.net/other/emblems/" . strtolower($tier) . "_" . $rank . ".png";
-			return base64_encode(file_get_contents($url));
+			return base64_encode(ModelRiotApi::doHttpRequest($url));
+		}
+
+		//OTHER GETTER
+		public static function getRegionByServer($server){
+			return ModelRiotApi::$ServerRegionEquivalence[$server];
+		}
+		//pas terminé, il faudra ajouter la liste dans le "array"
+		public static function getServerList(){
+			$server_list = array();
+			foreach (modelRiotApi::$ServerRegionEquivalence as $key => $value) {
+				$server_list[] = $key;
+			}
+			return $server_list;
 		}
 	}
 ?>
