@@ -1,0 +1,14 @@
+.summonerInfo{
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.rankInfo{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#summonerName{
+    font-size: 25px;
+    font-weight: bold;
+}
