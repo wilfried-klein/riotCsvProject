@@ -1,3 +1,29 @@
+html{
+    background-color: #606060;
+    scroll-behavior: smooth;
+    color: whitesmoke;
+}
+
+body{
+    width: 80%;
+    margin: auto;
+    font-family: "GalyonBook", "Arial", "sans-serif";
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh; /*vh=viewport donc 100% de la taille de la page*/
+    background-color: rgba(0, 0, 0, .7);
+}
+
+main{
+    flex: 1; /* ? */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .summonerInfo{
     display: flex;
     flex-flow: column wrap;

@@ -18,7 +18,7 @@
 	//l'id correspondant au joueur sont a la fin.
 
 class ModelRiotApi{
-	private static $api_key = "RGAPI-d1b01cff-22ad-4ff1-b3b8-117df0ab7cdb";
+	private static $api_key = "RGAPI-4e8fba46-10bc-4239-96c9-70553c607409";
 
 	private static $ServerRegionEquivalence = array(
 		'na1'  => 'americas',
