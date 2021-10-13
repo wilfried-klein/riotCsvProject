@@ -40,8 +40,8 @@
                     echo '<img src="data:image/jpeg;base64,'.$championIcon.'"style="width:75px;height:75px;">';
                     echo "<br>";
                     echo "<p>Objet de la partie :</p>";
+                    echo "<table>";
                     for ($i=0; $i < 6; $i++) {
-                        echo "<table>";
                         if(array_key_exists($i, $itemsIcon)){
                             echo "<td>";
                             echo '<img src="data:image/jpeg;base64,'.$itemsIcon[$i].'">';

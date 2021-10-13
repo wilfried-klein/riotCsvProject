@@ -1,6 +1,6 @@
 <?php
-
-
+	//supprimer pour afficher les erreurs
+	error_reporting(0);
 	//04/10/2021
 	//ajout du getter pour données des runes
 	//images des runes
@@ -366,7 +366,12 @@ class ModelRiotApi{
 
 		//OTHER GETTER
 		public static function getRegionByServer($server){
-			return ModelRiotApi::$ServerRegionEquivalence[$server];
+			if(array_key_exists($server,ModelRiotApi::$ServerRegionEquivalence)){
+				return ModelRiotApi::$ServerRegionEquivalence[$server];
+			}else{
+				throw new Exception("ServerNotExist");
+			}
+			
 		}
 		//pas terminé, il faudra ajouter la liste dans le "array"
 		public static function getServerList(){
