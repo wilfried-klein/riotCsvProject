@@ -14,10 +14,40 @@ body{
     align-items: center;
     min-height: 100vh; /*vh=viewport donc 100% de la taille de la page*/
     background-color: rgba(0, 0, 0, .7);
+    min-width: 520px;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+}
+
+header img {
+    margin-top: 4%;
+    max-width: 45%;
+    height: auto;
+}
+
+header #bordureLogo {
+    margin-top: 2%;
+    width: 100%;
+    margin-bottom: 1%;
+    border-bottom: 5px solid white;
 }
 
 main{
     flex: 1; /* ? */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.top{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -29,9 +59,54 @@ main{
     flex-flow: column wrap;
 }
 
+.middle {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: greenyellow;
+    flex-wrap: wrap;
+}
+
+.leftSide {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: cyan;
+    min-width: 280px;
+}
+
 .rankInfo{
     display: flex;
+    justify-content: center;
+    text-align: center;
     flex-flow: row wrap;
+}
+
+.main {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: red;
+}
+
+.allInfos {
+    width: 100%;
+    background-color: blueviolet;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.lastGameInfo {
+    background-color: cornflowerblue;
 }
 
 #summonerName{

@@ -116,13 +116,14 @@ $itemsList = array(
 	$summonerMatchData['item0'],
 	$summonerMatchData['item1'],
 	$summonerMatchData['item2'],
+    $summonerMatchData['item3'],
 	$summonerMatchData['item4'],
 	$summonerMatchData['item5'],
 	$summonerMatchData['item6']
 );
 try {
 	$itemsIcon = array();
-	for ($i=0; $i < 6; $i++) { 
+	for ($i=0; $i < 7; $i++) {
 		if($itemsList[$i] != '0'){
 			$itemsIcon[$i] = ModelRiotApi::getItemAsset($version,$itemsList[$i]);
 		}
