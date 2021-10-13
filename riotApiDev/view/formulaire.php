@@ -5,7 +5,7 @@
         <title>Data Displayer</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="../controller/css/styleFrom.css">
-        <link rel="icon" type="image/png" href="../controller/img/logo-site.png" />
+        <link rel="icon" type="image/png" href="../controller/img/logo-site2.png" />
     </head>
 
     <body>
