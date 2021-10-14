@@ -12,7 +12,7 @@ try {
 try {
 	$version = ModelRiotApi::getVersionData()[0];
 } catch (Exception $e) {
-	die("une erreur est survenue");
+	die("une erreur est survenue15");
 }
 try {
 	$summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
@@ -33,7 +33,7 @@ try {
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if($errorCode == "404"){
-		die("une erreur est survenue");
+		die("une erreur est survenue36");
 	}
 	if ($errorCode == "403") {
 		die("cette image de profil n'existe pas");
@@ -71,14 +71,16 @@ try {
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if($errorCode == "404"){
-		die("une erreur est survenue");
+		die("une erreur est survenue74");
 	}
 	if ($errorCode == "403") {
 		die("ce rang n'existe pas");
 	}
 }
 try {
-	$lastMatchID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,1)[0];
+	$lastMatchID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,10);
+    print_r($lastMatchID);
+    $lastMatchID=$lastMatchID[0];
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if ($errorCode == "403") {
@@ -131,7 +133,7 @@ try {
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if($errorCode == "404"){
-		die("une erreur est survenue");
+		die("une erreur est survenue136");
 	}
 	if ($errorCode == "403") {
 		die("cet objet n'existe pas");
@@ -143,7 +145,7 @@ try {
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if($errorCode == "404"){
-		die("une erreur est survenue");
+		die("une erreur est survenue148");
 	}
 	if ($errorCode == "403") {
 		die("cet champion n'existe pas");

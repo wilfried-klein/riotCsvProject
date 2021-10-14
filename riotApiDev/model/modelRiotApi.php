@@ -16,7 +16,6 @@
 	//entre chaque participantFrames un tableau d'event est crée ou a chaque evenement (liste a definir) en jeu indique sont type, sont horodatage (en milliseconde) et les info le concernants
 	//les métadonnées sont au début et indique la liste des participants
 	//l'id correspondant au joueur sont a la fin.
-
 class ModelRiotApi{
 	private static $api_key = "RGAPI-4e8fba46-10bc-4239-96c9-70553c607409";
 
@@ -110,7 +109,7 @@ class ModelRiotApi{
 		//retourne un array
 		public static function getChampionMasteryBySummonerIdAndChampionId($summonerID, $championId, $server){
 			$url = "https://" . $server . ".api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" . $summonerID . "/by-champion/" . $championId . "?api_key=" . ModelRiotApi::$api_key;
-			return json_decode(ModelRiotApi::doHttpRequest($url), true); 
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/champion-mastery/v4/scores/by-summoner
 		//obtenir le nombre total de point de maitrise d'un invocateur
@@ -209,7 +208,7 @@ class ModelRiotApi{
 		//valid value for type = {ranked,normal,tourney,tutorial}
 		public static function getMatchByPuuid($summonerPuuid,$region,$startTime=null,$endTime=null,$queue=null,$type=null,$start=null,$count=null){
 			$url = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" . $summonerPuuid . "/ids?startTime=" . $startTime . "&endTime=" . $endTime . "&queue=" . $queue . "&type=" . $type . "&start=" . $start . "&count=" . $count . "&api_key=" . ModelRiotApi::$api_key;
-			return json_decode(ModelRiotApi::doHttpRequest($url), true); 
+			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//lol/match/v5/matches/timeline
 		//obtenir les données a propos des envenement au cours d'une partie
@@ -269,8 +268,8 @@ class ModelRiotApi{
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/champion.json";
 			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
-		public static function getChampionData($championName){
-			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/champion/" . $championName . ".json";
+		public static function getChampionData($version, $language, $championName){
+			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/champion/" . $championName . ".json";
 			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
 		//return image
@@ -303,7 +302,7 @@ class ModelRiotApi{
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/data/" . $language . "/item.json";
 			return json_decode(ModelRiotApi::doHttpRequest($url), true);
 		}
-		//return image 
+		//return image
 		public static function getItemAsset($version,$itemID){
 			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/img/item/" . $itemID . ".png";
 			return base64_encode(ModelRiotApi::doHttpRequest($url));
