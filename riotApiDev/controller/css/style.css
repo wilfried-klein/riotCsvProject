@@ -105,14 +105,6 @@ main{
     align-items: flex-start;
 }
 
-@media (max-width: 1766px){
-
-    .allInfos {
-        margin-left: 0;
-    }
-
-}
-
 .lastGameInfo {
     background-color: cornflowerblue;
     width: 100%;
@@ -121,4 +113,13 @@ main{
 #summonerName{
     font-size: 25px;
     font-weight: bold;
+}
+
+/* MEDIA */
+@media (max-width: 1766px){
+
+    .allInfos {
+        margin-left: 0;
+    }
+
 }

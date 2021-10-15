@@ -150,5 +150,5 @@ try {
 		die("cet champion n'existe pas");
 	}
 }
-require '../view/diplayLastMatch.php';
+require '../view/displayLastMatch.php';
 ?>

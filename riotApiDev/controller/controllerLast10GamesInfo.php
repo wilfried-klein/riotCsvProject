@@ -169,5 +169,5 @@ for ($i=0; $i < count($last10MatchesID); $i++){
 	$Matches10[] = $itemsIcon;
 }
 //print_r($Matches10);
-require '../view/diplayLastTenMatchs.php';
+require '../view/displayLastTenMatchs.php';
 ?>
