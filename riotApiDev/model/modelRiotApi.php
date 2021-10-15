@@ -1,6 +1,7 @@
 <?php
+	set_time_limit(0);
 	//supprimer pour afficher les erreurs
-	error_reporting(0);
+	//error_reporting(0);
 	//04/10/2021
 	//ajout du getter pour données des runes
 	//images des runes

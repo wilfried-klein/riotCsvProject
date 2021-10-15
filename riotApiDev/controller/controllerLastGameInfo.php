@@ -79,7 +79,6 @@ try {
 }
 try {
 	$lastMatchID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,10);
-    print_r($lastMatchID);
     $lastMatchID=$lastMatchID[0];
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();

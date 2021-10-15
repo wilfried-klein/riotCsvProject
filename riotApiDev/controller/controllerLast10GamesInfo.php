@@ -85,96 +85,89 @@ try {
 }
 
 try {
-    $last10MatchesID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,10);
-    print_r($last10MatchesID);
+	$last10MatchesID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,10);
+    //print_r($last10MatchesID);
 } catch (Exception $e) {
-    $errorCode = $e->getMessage();
-    if ($errorCode == "403") {
-        die("Cette invocateur n'existe pas");
-    }
-    if ($errorCode == "429") {
-        die("Trop de demande,veuiller reéssayer");
-    }
-    if($errorCode == "503"){
-        die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-    }
+	$errorCode = $e->getMessage();
+	if ($errorCode == "403") {
+		die("Cette invocateur n'existe pas");
+	}
+	if ($errorCode == "429") {
+		die("Trop de demande,veuiller reéssayer");
+	}
+	if($errorCode == "503"){
+		die("le service est temporairement indisponible, veuiller reéssayer plus tard");
+	}
 }
+$Matches10 = array();
+for ($i=0; $i < count($last10MatchesID); $i++){
+	$matchID = $last10MatchesID[$i];
+	try{
+		$matchData = ModelRiotApi::getMatchData($matchID, $region);
+	}
+	catch (Exception $e) {
+		$errorCode = $e->getMessage();
+		if ($errorCode == "403") {
+			die("Le match demandé n'existe pas");
+		}
+		if ($errorCode == "429") {
+			die("Trop de demande,veuiller reéssayer");
+		}
+		if($errorCode == "503"){
+			die("le service est temporairement indisponible, veuiller reéssayer plus tard");
+		}
+	}
 
-$Matches10=array();
+	$index = $matchData['metadata'];
+	$index = $index['participants'];
+	$index = array_search($summonerInfo['puuid'], $index);
 
-for ($i=0; $i<=count($last10MatchesID); $i++){
+	$summonerMatchData = $matchData['info'];
+	$summonerMatchData = $summonerMatchData['participants'];
+	$summonerMatchData = $summonerMatchData[$index];
 
-$matchID = $last10MatchesID[$i];
-echo $matchID;
+	$itemsList = array(
+		$summonerMatchData['item0'],
+		$summonerMatchData['item1'],
+		$summonerMatchData['item2'],
+		$summonerMatchData['item3'],
+		$summonerMatchData['item4'],
+		$summonerMatchData['item5'],
+		$summonerMatchData['item6']
+	);
+	try {
+		$itemsIcon = array();
+		for ($j=0; $j < 7; $j++) {
+			if($itemsList[$j] != '0'){
+				$itemsIcon[$j] = ModelRiotApi::getItemAsset($version,$itemsList[$j]);
+			}
+		}
+	}
+	catch (Exception $e) {
+		$errorCode = $e->getMessage();
+		if($errorCode == "404"){
+			die("une erreur est survenueee");
+		}
+		if ($errorCode == "403") {
+			die("cet objet n'existe pas");
+		}
+	}
 
-try{
-    $matchData = ModelRiotApi::getMatchData($matchID, $region);
+	try {
+		$itemsIcon['championName'] = $summonerMatchData['championName'];
+		$itemsIcon['championIcon'] = ModelRiotApi::getChampionSquareAsset($version,$itemsIcon['championName']);
+	} catch (Exception $e) {
+		$errorCode = $e->getMessage();
+		if($errorCode == "404"){
+			die("une erreur est survenue");
+		}
+		if ($errorCode == "403") {
+			die("cet champion n'existe pas");
+		}
+	}
+	$itemsIcon['result'] = $summonerMatchData['win'];
+	$Matches10[] = $itemsIcon;
 }
-catch (Exception $e) {
-        $errorCode = $e->getMessage();
-        if ($errorCode == "403") {
-            die("Le match demandé n'existe pas");
-        }
-        if ($errorCode == "429") {
-            die("Trop de demande,veuiller reéssayer");
-        }
-        if($errorCode == "503"){
-            die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-        }
-    }
-
-$index = $matchData['metadata'];
-$index = $index['participants'];
-$index = array_search($summonerInfo['puuid'], $index);
-
-$summonerMatchData = $matchData['info'];
-$summonerMatchData = $summonerMatchData['participants'];
-$summonerMatchData = $summonerMatchData[$index];
-
-    $itemsList = array(
-        $summonerMatchData['item0'],
-        $summonerMatchData['item1'],
-        $summonerMatchData['item2'],
-        $summonerMatchData['item3'],
-        $summonerMatchData['item4'],
-        $summonerMatchData['item5'],
-        $summonerMatchData['item6']
-    );
-    print_r($itemsList);
-    try {
-        $itemsIcon = array();
-        for ($i=0; $i < 7; $i++) {
-            if($itemsList[$i] != '0'){
-                $itemsIcon[$i] = ModelRiotApi::getItemAsset($version,$itemsList[$i]);
-            }
-        }
-    }
-    catch (Exception $e) {
-        $errorCode = $e->getMessage();
-        if($errorCode == "404"){
-            die("une erreur est survenueee");
-        }
-        if ($errorCode == "403") {
-            die("cet objet n'existe pas");
-        }
-    }
-
-    try {
-        $itemsIcon['championName'] = $summonerMatchData['championName'];
-        $itemsIcon['championIcon'] = ModelRiotApi::getChampionSquareAsset($version,$itemsIcon['championName']);
-    } catch (Exception $e) {
-        $errorCode = $e->getMessage();
-        if($errorCode == "404"){
-            die("une erreur est survenue");
-        }
-        if ($errorCode == "403") {
-            die("cet champion n'existe pas");
-        }
-    }
-
-    $Matches10[$i]=$itemsIcon;
-}
-
-
+//print_r($Matches10);
 require '../view/testPlusieursGames.php';
 ?>
