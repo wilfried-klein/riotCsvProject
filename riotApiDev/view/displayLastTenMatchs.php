@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <img src="../controller/img/logo_lol.png" alt="logo de lol">
+        <a href="../view/formLastTenMatchs.php"><img src="../controller/img/logo_lol.png" alt="logo de lol"></a>
         <form method="post" action="../controller/controllerLast10GamesInfo.php">
             <fieldset>
                 <label for="summonerName_id"></label>
