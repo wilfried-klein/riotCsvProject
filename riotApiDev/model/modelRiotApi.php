@@ -276,26 +276,26 @@ class ModelRiotApi{
 		//return image
 		public static function getChampionSplashAsset($championName,$skinNum){
 			$url = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . $championName . "_" . $skinNum . ".jpg";
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return image
 		public static function getChampionLoadingScreenAsset($championName, $skinNum){
 			$url = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/" . $championName . "_" . $skinNum . ".jpg";
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return image
 		public static function getChampionSquareAsset($version,$championName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/champion/" . $championName . ".png";
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return image
 		public static function getPassiveAsset($version,$imageName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/11.19.1/img/passive/" . $imageName;
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		public static function getAbilityAsset($version,$imageName){
 			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/img/spell/" . $imageName;
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return image
 		//https://developer.riotgames.com/docs/lol#data-dragon_items
@@ -306,7 +306,7 @@ class ModelRiotApi{
 		//return image
 		public static function getItemAsset($version,$itemID){
 			$url = "http://ddragon.leagueoflegends.com/cdn/" . $version . "/img/item/" . $itemID . ".png";
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//https://developer.riotgames.com/docs/lol#data-dragon_other
 		public static function getSummonerSpellsData($version,$language){
@@ -316,7 +316,7 @@ class ModelRiotApi{
 		//return image
 		public static function getSummonerSpellAsset($version,$imageName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/spell/" . $imageName;
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return array
 		public static function getProfileIconData($version,$imageName){
@@ -326,7 +326,7 @@ class ModelRiotApi{
 		//return image
 		public static function getProfileIconAsset($version,$iconID){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/profileicon/" . $iconID . ".png";
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return array
 		public static function getRunesData($version,$language){
@@ -336,17 +336,17 @@ class ModelRiotApi{
 		//return image
 		public static function getRunesAsset($iconPath){
 			$url = "https://ddragon.leagueoflegends.com/cdn/img/" . $iconPath;
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return image
 		public static function getMiniMapAsset($version,$miniMapID){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/map/map" . $miniMapID . ".png";
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//return image
 		public static function getSprite($version,$spriteName){
 			$url = "https://ddragon.leagueoflegends.com/cdn/" . $version . "/img/sprite/" . $spriteName;
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 		//IMPORTANT !!!
 		//$tier in lowercase and $rank in arab number  (GOLD IV => gold  4)
@@ -361,7 +361,7 @@ class ModelRiotApi{
 				$rank="4";
 			};
 			$url = "https://ddragon.bangingheads.net/other/emblems/" . strtolower($tier) . "_" . $rank . ".png";
-			return base64_encode(ModelRiotApi::doHttpRequest($url));
+			return $url;
 		}
 
 		//OTHER GETTER
