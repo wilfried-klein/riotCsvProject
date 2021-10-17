@@ -38,14 +38,14 @@
     <main>
         <div class="top">
             <div class="summonerInfo">
-                <?php echo '<img src="'.$summonerIcon.'"style="width:100px;height:100px;">'; ?>
+                <img src="<?php echo $summonerIcon?>" alt="logo de l'invocateur" />
                 <p id="summonerName"><?php echo $summonerName ?></p>
             </div>
         </div>
         <div class="middle">
             <div class="leftSide">
                 <div class="rankInfo">
-                    <?php echo '<img src="'.$rankedEmblems.'"style="width:100px;height:100px;">'; ?>
+                    <img src="<?php echo $rankedEmblems?>" alt="division de l'invocateur" />
                     <div class="rankData">
                         <?php
                         if($tier == "unranked"){
