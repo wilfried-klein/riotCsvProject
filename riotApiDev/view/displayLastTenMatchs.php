@@ -86,14 +86,14 @@
                                 echo "</div>";
                                 echo "</td>";
                                 echo "<td>";
-                                    echo round($value['gameDuration']/60) . " Min " . $value['gameDuration']%60;
-                                    echo $value['matchType'];
-                                    echo "Le " . $value['matchDate']['mday'] . "/" . $value['matchDate']['mon'] . "/" . $value['matchDate']['year'];
+                                    echo "<p> " . round($value['gameDuration']/60) . " Min " . $value['gameDuration']%60 . "</p>";
+                                    echo "<p> " . $value['matchType'] . "</p>";
+                                    echo "<p> " . "Le " . $value['matchDate']['mday'] . "/" . $value['matchDate']['mon'] . "/" . $value['matchDate']['year'] . "</p>";
                                 echo "</td>";
                                 echo "<td>";
-                                    echo $value['kills'] . "/" . $value['deaths'] . $value['assists'] ;
-                                    echo $value['creepScore'] . " CS";
-                                    echo "Score de vision : " . $value['visionScore'];
+                                    echo "<p> " . $value['kills'] . "/" . $value['deaths'] . $value['assists'] . "</p>" ;
+                                    echo "<p> " . $value['creepScore'] . " CS" . "</p>";
+                                    echo "<p> " . "Score de vision : " . $value['visionScore'] . "</p>";
                                 echo "</td>";
                                 echo "<td>";
                                     for ($i=0; $i < 7; $i++) {

@@ -31,6 +31,13 @@ try {
 }
 try {
 	$rankingData = ModelRiotApi::getLeagueDatabySummonerId($summonerInfo['id'], $server);
+	foreach ($rankingData as $value) {
+		if($value['queueType'] == "RANKED_SOLO_5x5"){
+			$rankingInfo = $value;
+			break;
+		}
+	}
+	unset($value);
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if ($errorCode == "403") {
@@ -43,8 +50,7 @@ try {
 		die("le service est temporairement indisponible, veuiller reéssayer plus tard");
 	}
 }
-if(array_key_exists(0, $rankingData)){
-	$rankingInfo = $rankingData[0];
+if(isset($rankingInfo)){
 	//obtention des informations necessaires a l'affichage
 	$tier = $rankingInfo['tier'];
 	$rank = $rankingInfo['rank'];
@@ -68,7 +74,8 @@ try {
 	}
 }
 try {
-	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,2);
+	$partieNumber = 20;
+	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,$partieNumber);
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if ($errorCode == "403") {
@@ -204,7 +211,11 @@ for ($numG=0; $numG < count($lastMatchsID); $numG++) {
 	} catch (Exception $e) {
 		die();
 	}
-	$return['gameDuration'] = $matchData['info']['gameDuration'];
+	if(array_key_exists('gameEndTimestamp',$matchData['info'])){
+		$return['gameDuration'] = $matchData['info']['gameDuration'];
+	}else{
+		$return['gameDuration'] = $matchData['info']['gameDuration']/1000;
+	}
 	foreach ($queueData as $value) {
 		if($value['queueId'] == $matchData['info']['queueId']) {
 			$return['matchType'] = $value['description'];
@@ -249,8 +260,40 @@ for ($numG=0; $numG < count($lastMatchsID); $numG++) {
 		}
 	}
 	$return['itemsIcon'] = $itemsIcon;
+	$return['goldEarned'] = $summonerMatchData[$currentSummonerIndex]['goldEarned'];
+	$return['role'] = $summonerMatchData[$currentSummonerIndex]['teamPosition'];
 	$result[] = $return;
-	$summonerIcon = $return['summonerIconList'][$currentSummonerIndex];
+	try {
+		$summonerIcon = ModelRiotApi::getProfileIconAsset($version,$summonerInfo['profileIconId']);
+	} catch (Exception $e) {
+		die("erreur 261");
+	}
 }
+//moyenne
+$average = array();
+$averageVision = 0;
+$averageKills = 0;
+$averageDeaths = 0;
+$averageGolds = 0;
+$averageDuration = 0;
+$favoriteRole = array();
+for ($i=0; $i < $partieNumber; $i++) {
+	$averageVision = $averageVision + $result[$i]['visionScore'];
+	$averageKills = $averageKills + $result[$i]['kills'];
+	$averageDeaths = $averageDeaths + $result[$i]['deaths'];
+	$averageGolds = $averageGolds + $result[$i]['goldEarned'];
+	$averageDuration = $averageDuration + $result[$i]['gameDuration'];
+	$favoriteRole[] = $result[$i]['role'];
+}
+$average['averageVision'] = floor($averageVision/$partieNumber);
+$average['averageKills'] = floor($averageKills/$partieNumber);
+$average['averageKills'] = floor($averageDeaths/$partieNumber);
+$average['averageGolds'] = floor($averageGolds/$partieNumber);
+$average['averageDuration'] = floor($averageDuration/$partieNumber);
+//favorite role :
+$counts = array_count_values($favoriteRole);
+arsort($counts);
+$average['favoriteRole'] = array_keys($counts)[0];
+//print_r($average);
 require '../view/displayLastTenMatchs.php';
 ?>
