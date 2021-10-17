@@ -1,8 +1,6 @@
 <?php
-require_once '../model/modelRiotApi.php';
-
-$summonerName = $_POST['summonerName'];
-$server = $_POST['server'];
+$summonerName = $_GET['summonerName'];
+$server = $_GET['server'];
 $language = 'fr_FR';
 
 try {
@@ -74,7 +72,7 @@ try {
 	}
 }
 try {
-	$partieNumber = 20;
+	$partieNumber = 3;
 	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,$partieNumber);
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
@@ -213,8 +211,12 @@ for ($numG=0; $numG < count($lastMatchsID); $numG++) {
 	}
 	if(array_key_exists('gameEndTimestamp',$matchData['info'])){
 		$return['gameDuration'] = $matchData['info']['gameDuration'];
+		$return['gameDurationMin'] = round($matchData['info']['gameDuration']/60);
+		$return['gameDurationSeconde'] = $matchData['info']['gameDuration']%60;
 	}else{
 		$return['gameDuration'] = $matchData['info']['gameDuration']/1000;
+		$return['gameDurationMin'] = round(($matchData['info']['gameDuration']/1000)/60);
+		$return['gameDurationSeconde'] = ($matchData['info']['gameDuration']/1000)%60;
 	}
 	foreach ($queueData as $value) {
 		if($value['queueId'] == $matchData['info']['queueId']) {
@@ -290,10 +292,10 @@ $average['averageKills'] = floor($averageKills/$partieNumber);
 $average['averageKills'] = floor($averageDeaths/$partieNumber);
 $average['averageGolds'] = floor($averageGolds/$partieNumber);
 $average['averageDuration'] = floor($averageDuration/$partieNumber);
+$average['averageDurationMin'] = floor(($averageDuration/$partieNumber)/60);
+$average['averageDurationSec'] = ($averageDuration/$partieNumber)%60;
 //favorite role :
 $counts = array_count_values($favoriteRole);
 arsort($counts);
 $average['favoriteRole'] = array_keys($counts)[0];
-//print_r($average);
-require '../view/displayLastTenMatchs.php';
 ?>

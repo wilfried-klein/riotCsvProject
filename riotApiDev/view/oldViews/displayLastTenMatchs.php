@@ -91,7 +91,7 @@
                                     echo "<p> " . "Le " . $value['matchDate']['mday'] . "/" . $value['matchDate']['mon'] . "/" . $value['matchDate']['year'] . "</p>";
                                 echo "</td>";
                                 echo "<td>";
-                                    echo "<p> " . $value['kills'] . "/" . $value['deaths'] . $value['assists'] . "</p>" ;
+                                    echo "<p> " . $value['kills'] . "/" . $value['deaths'] . "/" . $value['assists'] . "</p>" ;
                                     echo "<p> " . $value['creepScore'] . " CS" . "</p>";
                                     echo "<p> " . "Score de vision : " . $value['visionScore'] . "</p>";
                                 echo "</td>";
