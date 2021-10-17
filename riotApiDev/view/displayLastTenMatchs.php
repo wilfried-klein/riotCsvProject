@@ -62,32 +62,58 @@
             <div class="main">
                 <div class="allInfos">
                     <div class="lastGameInfo">
+                        <table>
                         <?php
-                            foreach ($result as $value){
+                            foreach ($result as $value) {
+                                echo "<tr>";
+                                echo "<td>";
                                 if($value['result'] == true){
                                     echo '<h3 style="color: #1217C0;">VICTOIRE</h3>';
                                 }else{
                                     echo '<h3 style="color: #C01712;">DÉFAITE</h3>';
                                 }
-                                echo "champion :";
-                                echo $value['championName'];
-                                echo '<img src="'. $value['championIcon'].'"style="width:75px;height:75px;">';
-                                echo "<br>";
-                                echo "<p>Objet de la partie :</p>";
-                                echo "<table>";
-                                for($j=0; $j<7; $j++){
-                                    if(array_key_exists($j, $value['itemsIcon'])){
-                                        echo "<td>";
-                                        echo '<img src="'. $value['itemsIcon'][$j].'"style="width:75px;height:75px;">';
-                                        echo "<td>";
+                                echo "<div>";
+                                    echo '<img src="'. $value['championIcon'].'">';
+                                    echo "<div>";
+                                        echo '<img src="'. $value['summonerSpell1'].'">';
+                                        echo '<img src="'. $value['summonerSpell2'].'">';
+                                    echo "</div>";
+                                echo "</div>";
+                                echo "<div>";
+                                    echo $value['championName'];
+                                    echo '<img src="'. $value['rune1Icon'].'">';
+                                    echo '<img src="'. $value['rune2Icon'].'">';
+                                echo "</div>";
+                                echo "</td>";
+                                echo "<td>";
+                                    echo round($value['gameDuration']/60) . " Min " . $value['gameDuration']%60;
+                                    echo $value['matchType'];
+                                    echo "Le " . $value['matchDate']['mday'] . "/" . $value['matchDate']['mon'] . "/" . $value['matchDate']['year'];
+                                echo "</td>";
+                                echo "<td>";
+                                    echo $value['kills'] . "/" . $value['deaths'] . $value['assists'] ;
+                                    echo $value['creepScore'] . " CS";
+                                    echo "Score de vision : " . $value['visionScore'];
+                                echo "</td>";
+                                echo "<td>";
+                                    for ($i=0; $i < 7; $i++) {
+                                        if(array_key_exists($i,$value['itemsIcon'])){
+                                            echo '<img src="'. $value['itemsIcon'][$i].'">';
+                                        }
+
+                                    };
+                                echo "</td>";
+                                echo "<td>";
+                                    for ($g=0; $g < 5; $g++) {
+                                        echo "<div>";
+                                            echo $value['summonerNameList'][$g] . '<img src="'. $value['summonerIconList'][$g].'">' . '<img src="'. $value['summonerIconList'][$g+5].'">' . $value['summonerNameList'][$g+5];
+                                        echo "</div>";
                                     }
-                                }
-                                echo "</table>";
+                                echo "</td>";
+                                echo "</tr>";
                             }
                         ?>
-                        <br>
-                        <br>
-                        <br>
+                    </table>
                     </div>
                 </div>
             </div>

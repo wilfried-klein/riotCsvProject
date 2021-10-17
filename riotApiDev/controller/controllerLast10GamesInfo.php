@@ -68,7 +68,7 @@ try {
 	}
 }
 try {
-	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,10);
+	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,2);
 } catch (Exception $e) {
 	$errorCode = $e->getMessage();
 	if ($errorCode == "403") {
@@ -130,7 +130,7 @@ for ($numG=0; $numG < count($lastMatchsID); $numG++) {
 	for($i = 0; $i < 10; $i++) {
 		$soloSummonerInfo = $summonerMatchData[$i];
 		try {
-			$summonerIconList[$i] = ModelRiotApi::getProfileIconAsset($version,$summonerMatchData[$i]['profileIcon']);
+			$summonerIconList[$i] = ModelRiotApi::getChampionSquareAsset($version,$summonerMatchData[$i]['championName']);
 		} catch (Exception $e) {
 			$errorCode = $e->getMessage();
 			if($errorCode == "404"){
@@ -236,7 +236,7 @@ for ($numG=0; $numG < count($lastMatchsID); $numG++) {
 		$itemsIcon = array();
 		for ($i=0; $i < 7; $i++) {
 			if($itemsList[$i] != '0'){
-				$itemsIcon[$i] = ModelRiotApi::getItemAsset($version,$itemsList[$i]);
+				$itemsIcon[] = ModelRiotApi::getItemAsset($version,$itemsList[$i]);
 			}
 		}
 	} catch (Exception $e) {
