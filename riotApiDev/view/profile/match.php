@@ -38,13 +38,16 @@
 	</td>
 
 	<td class="info4">
-		<?php
-		for ($i=0; $i < 7; $i++) {
-			if(array_key_exists($i,$value['itemsIcon'])){
-				echo '<img src="'. $value['itemsIcon'][$i].'">';
-			}
-		};
-		?>
+            <div class="objets">
+                <?php
+                for ($i=0; $i < 6; $i++) {
+                    if(array_key_exists($i,$value['itemsIcon'])){
+                        echo '<img src="'. $value['itemsIcon'][$i].'">';
+                    }
+                };
+                ?>
+            </div>
+            <img class="ward" src="<?php echo $value['wardIcon']?>" alt="icone de la ward"/>
 	</td>
 
 	<td class="info5">
@@ -56,4 +59,8 @@
 		}
 		?>
 	</td>
+
+    <td class="info6">
+        <p>a</p> <!-- FAIRE BOUTON ICI -->
+    </td>
 </tr>
