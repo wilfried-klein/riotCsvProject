@@ -24,9 +24,15 @@ header{
     width: 80%;
 }
 
-header img{
-    margin-top: 4%;
-    max-width: 45%;
+header a {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    width: 35%;
+}
+
+header a img {
+    max-width: 129%;
     height: auto;
 }
 
