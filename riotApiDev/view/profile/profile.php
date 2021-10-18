@@ -23,14 +23,16 @@
 			</div>  
 		</div>
 		<div class="main">
-			<div class="matchList">
-				<table>
-					<?php
-					foreach ($result as $value) {
-						require 'match.php';
-					}
-					?>
-				</table>
+			<div class="allInfos">
+                <div class="lastGameInfo">
+                    <table>
+                        <?php
+                        foreach ($result as $value) {
+                            require 'match.php';
+                        }
+                        ?>
+                    </table>
+                </div>
 			</div>
 		</div>
 	</div>
