@@ -325,6 +325,10 @@ tr{
     width: 3%; /* suspence et boule de gomme */
 }
 
+.info6 form fieldset{
+    border: none;
+}
+
 /* POLICE */
 
 @font-face {

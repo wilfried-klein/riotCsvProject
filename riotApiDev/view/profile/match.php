@@ -61,6 +61,12 @@
 	</td>
 
     <td class="info6">
-        <p>a</p> <!-- FAIRE BOUTON ICI -->
+        <form method="get" action="index.php">
+            <fieldset>
+                <input type="hidden" name="action" value="getCsv">
+                <input type="hidden" name="nbGames" value="1">
+            </fieldset>
+            <input type="submit" value="CSV" class="bouton">
+        </form>
     </td>
 </tr>
