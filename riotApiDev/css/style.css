@@ -199,6 +199,98 @@ main{
      */
 }
 
+/* TABLEAU */
+
+.lastGameInfo table tr{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info1{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info1 h3{
+    width: 100%;
+    text-align: center;
+}
+
+.info1 .info1Global{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info1 .info1Global .champEtSort{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info1 .info1Global .champEtSort .champ{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info1 .info1Global .champEtSort .champ p{
+    margin-top: 4px;
+    text-align: center;
+}
+
+.info1 .info1Global .champEtSort .summonerSpell{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info1 .info1Global .runes{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info2{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.info2 p{
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.info3{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.info3 p{
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.info4{
+    width: 20%;
+}
+
+.info5{
+    width: 30%; /*j'me garde 5% pour faire bouton dl du csv*/
+}
+
+
+
+
+
+
 /* POLICE */
 
 @font-face {
