@@ -22,6 +22,9 @@ class Routeur{
 		$pagetitle = 'Accueil - League Data Analysis';
 		require(File::build_path(array("view","view.php")));
 	}
+	public static function getCsv(){
+		require (File::build_path(array("controller","controllerCsv.php")));
+	}
 }
 
 ?>
