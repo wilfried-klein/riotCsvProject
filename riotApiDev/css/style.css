@@ -328,6 +328,15 @@ tr{
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
+
+}
+
+.info5 a{
+    text-decoration:none;
+    color:whitesmoke;
+}
+.info5 a:hover{
+    color:whitesmoke;
 }
 
 .info5 img{
