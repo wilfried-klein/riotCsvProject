@@ -275,28 +275,32 @@ for ($numG=0; $numG < $matchAnalysedNumber; $numG++) {
 }
 //moyenne
 if($matchAnalysedNumber > 0){
-    $average = array();
-    $averageVision = 0;
-    $averageKills = 0;
-    $averageDeaths = 0;
-    $averageGolds = 0;
-    $averageDuration = 0;
+    $average = array(
+        'averageVision' => 0,
+        'averageKills' => 0,
+        'averageDeaths' => 0,
+        'averageGolds' => 0,
+        'averageDuration' => 0,
+        'averageDurationMin' => 0,
+        'averageDurationSec' => 0,
+        'favoriteRole' => "",
+    );
     $favoriteRole = array();
     for ($i=0; $i < $matchAnalysedNumber; $i++) {
-        $averageVision = $averageVision + $result[$i]['visionScore'];
-        $averageKills = $averageKills + $result[$i]['kills'];
-        $averageDeaths = $averageDeaths + $result[$i]['deaths'];
-        $averageGolds = $averageGolds + $result[$i]['goldEarned'];
-        $averageDuration = $averageDuration + $result[$i]['gameDuration'];
+        $average['averageVision'] = $average['averageVision'] + $result[$i]['visionScore'];
+        $average['averageKills'] = $average['averageKills'] + $result[$i]['kills'];
+        $average['averageDeaths'] = $average['averageDeaths'] + $result[$i]['deaths'];
+        $average['averageGolds'] = $average['averageGolds'] + $result[$i]['goldEarned'];
+        $average['averageDuration'] = $average['averageDurationMin'] + $result[$i]['gameDuration'];
         $favoriteRole[] = $result[$i]['role'];
     }
-    $average['averageVision'] = floor($averageVision/$matchAnalysedNumber);
-    $average['averageKills'] = floor($averageKills/$matchAnalysedNumber);
-    $average['averageKills'] = floor($averageDeaths/$matchAnalysedNumber);
-    $average['averageGolds'] = floor($averageGolds/$matchAnalysedNumber);
-    $average['averageDuration'] = floor($averageDuration/$matchAnalysedNumber);
-    $average['averageDurationMin'] = floor(($averageDuration/$matchAnalysedNumber)/60);
-    $average['averageDurationSec'] = ($averageDuration/$matchAnalysedNumber)%60;
+    $average['averageVision'] = floor($average['averageVision']/$matchAnalysedNumber);
+    $average['averageKills'] = floor($average['averageKills']/$matchAnalysedNumber);
+    $average['averageDeaths'] = floor($average['averageDeaths']/$matchAnalysedNumber);
+    $average['averageGolds'] = floor($average['averageGolds']/$matchAnalysedNumber);
+    $average['averageDuration'] = floor($average['averageDuration']/$matchAnalysedNumber);
+    $average['averageDurationMin'] = floor($average['averageDuration']/60);
+    $average['averageDurationSec'] = $average['averageDuration']%60;
     //favorite role :
     $counts = array_count_values($favoriteRole);
     arsort($counts);

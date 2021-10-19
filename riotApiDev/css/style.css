@@ -234,8 +234,9 @@ tr{
 }
 
 .info1 .winOrLoose img{
-    width: 44%;
+    width: 51%;
     height: auto;
+    margin: 0px 0px 3px 0px;
 
 }
 
@@ -324,7 +325,7 @@ tr{
 .info5{
     width: 30%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
 }
