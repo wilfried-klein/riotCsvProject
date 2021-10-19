@@ -86,13 +86,14 @@ try {
         die("le service est temporairement indisponible, veuiller reéssayer plus tard");
     }
 }
+$matchAnalysedNumber = count($lastMatchsID);
 try {
     $summonerSpellData = ModelRiotApi::getSummonerSpellsData($version,$language)['data'];
 } catch (Exception $e) {
     die("erreur lors de la récupération des données des sorts d'invocateur");
 }
 try {
-    $runeData = ModelRiotApi::getRunesData('11.20.1','fr_FR');
+    $runeData = ModelRiotApi::getRunesData($version,$language);
 } catch (Exception $e) {
     die("erreur lors de la récupération des données des runes");
 }
@@ -108,7 +109,7 @@ try {
 ********************************************************************************************************************************************
 */
 $result = array();
-for ($numG=0; $numG < count($lastMatchsID); $numG++) {
+for ($numG=0; $numG < $matchAnalysedNumber; $numG++) {
     try {
         $matchData = ModelRiotApi::getMatchData($lastMatchsID[$numG],$region);
     } catch (Exception $e) {
@@ -273,31 +274,34 @@ for ($numG=0; $numG < count($lastMatchsID); $numG++) {
     }
 }
 //moyenne
-$average = array();
-$averageVision = 0;
-$averageKills = 0;
-$averageDeaths = 0;
-$averageGolds = 0;
-$averageDuration = 0;
-$favoriteRole = array();
-for ($i=0; $i < $partieNumber; $i++) {
-    $averageVision = $averageVision + $result[$i]['visionScore'];
-    $averageKills = $averageKills + $result[$i]['kills'];
-    $averageDeaths = $averageDeaths + $result[$i]['deaths'];
-    $averageGolds = $averageGolds + $result[$i]['goldEarned'];
-    $averageDuration = $averageDuration + $result[$i]['gameDuration'];
-    $favoriteRole[] = $result[$i]['role'];
-}
-$average['averageVision'] = floor($averageVision/$partieNumber);
-$average['averageKills'] = floor($averageKills/$partieNumber);
-$average['averageKills'] = floor($averageDeaths/$partieNumber);
-$average['averageGolds'] = floor($averageGolds/$partieNumber);
-$average['averageDuration'] = floor($averageDuration/$partieNumber);
-$average['averageDurationMin'] = floor(($averageDuration/$partieNumber)/60);
-$average['averageDurationSec'] = ($averageDuration/$partieNumber)%60;
-//favorite role :
-$counts = array_count_values($favoriteRole);
-arsort($counts);
-$average['favoriteRole'] = array_keys($counts)[0];
-//echo count($result[0]['itemsIcon']);
+if($matchAnalysedNumber > 0){
+    $average = array();
+    $averageVision = 0;
+    $averageKills = 0;
+    $averageDeaths = 0;
+    $averageGolds = 0;
+    $averageDuration = 0;
+    $favoriteRole = array();
+    for ($i=0; $i < $matchAnalysedNumber; $i++) {
+        $averageVision = $averageVision + $result[$i]['visionScore'];
+        $averageKills = $averageKills + $result[$i]['kills'];
+        $averageDeaths = $averageDeaths + $result[$i]['deaths'];
+        $averageGolds = $averageGolds + $result[$i]['goldEarned'];
+        $averageDuration = $averageDuration + $result[$i]['gameDuration'];
+        $favoriteRole[] = $result[$i]['role'];
+    }
+    $average['averageVision'] = floor($averageVision/$matchAnalysedNumber);
+    $average['averageKills'] = floor($averageKills/$matchAnalysedNumber);
+    $average['averageKills'] = floor($averageDeaths/$matchAnalysedNumber);
+    $average['averageGolds'] = floor($averageGolds/$matchAnalysedNumber);
+    $average['averageDuration'] = floor($averageDuration/$matchAnalysedNumber);
+    $average['averageDurationMin'] = floor(($averageDuration/$matchAnalysedNumber)/60);
+    $average['averageDurationSec'] = ($averageDuration/$matchAnalysedNumber)%60;
+    //favorite role :
+    $counts = array_count_values($favoriteRole);
+    arsort($counts);
+    $average['favoriteRole'] = array_keys($counts)[0];
+}else{
+    $average = -1;
+} 
 ?>
