@@ -214,6 +214,7 @@ tr{
     margin-bottom: 20px;
     border: 5px solid white;
     border-radius: 0.7em;
+    padding: 5px;
 }
 
 .lastGameInfo table tr{
@@ -236,8 +237,7 @@ tr{
 .info1 .winOrLoose img{
     width: 51%;
     height: auto;
-    margin: 0px 0px 3px 0px;
-
+    margin: 0px 0 7px 0;
 }
 
 .info1 .info1Global{
@@ -275,6 +275,16 @@ tr{
     flex-direction: column;
 }
 
+.info1 .info1Global .runes .primaryRune{
+    height: 45px;
+    width: 45px;
+}
+
+.info1 .info1Global .runes .secondaryRune{
+    height: 25px;
+    width: 25px;
+}
+
 .info2{
     width: 15%;
     display: flex;
@@ -310,6 +320,9 @@ tr{
 
 .info4 .objets{
     max-width: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
 }
 
 .info4 .objets img{
@@ -325,9 +338,22 @@ tr{
 .info5{
     width: 30%;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+.info5 .equipe1{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.info5 .equipe2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .info5 img{
@@ -335,6 +361,20 @@ tr{
     width: 30px;
     margin-left: 2px;
     margin-right: 2px;
+}
+
+.info5 a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.equipeDiv{
+    display: flex;
+    align-items: center;
+}
+
+.info5 a:hover{
+    text-decoration: underline;
 }
 
 .info6{
