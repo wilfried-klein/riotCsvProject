@@ -328,6 +328,9 @@ tr{
 .info6 form fieldset{
     border: none;
 }
+.style7 input{
+    height: 25px;
+}
 
 /* POLICE */
 

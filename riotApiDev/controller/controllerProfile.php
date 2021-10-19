@@ -72,7 +72,7 @@ try {
     }
 }
 try {
-    $partieNumber = 3;
+    $partieNumber = 10;
     $lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,$partieNumber);
 } catch (Exception $e) {
     $errorCode = $e->getMessage();

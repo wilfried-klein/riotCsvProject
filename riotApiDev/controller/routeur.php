@@ -1,6 +1,6 @@
 <?php
 //Users\Wilfried\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.ph
-require_once ('C:\MAMP\htdocs\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
+require_once ('C:\Users\Wilfried\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
 require_once File::build_path(array("model","modelRiotApi.php"));
 $action = $_GET['action'];
 Routeur::$action();
@@ -13,7 +13,7 @@ class Routeur{
 		$controller='profile';
 		$view='profile';
 		$headerProfile='headerProfile';
-		$pagetitle = $summonerName . "League Data Analysis";
+		$pagetitle = $summonerName . " - League Data Analysis";
 		require(File::build_path(array("view","view.php")));
 	}
 	public static function formulaire(){

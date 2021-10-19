@@ -1,7 +1,7 @@
 <?php
 $summonerName = $_GET['summonerName'];
 $server = $_GET['server'];
-$gameNumber = $_GET['gameNumber'];
+$gameNumber = $_GET['nbGames'];
 $language = 'fr_FR';
 
 //obtention de la région correspondant au serveur
