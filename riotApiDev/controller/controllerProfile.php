@@ -294,9 +294,9 @@ if($matchAnalysedNumber > 0){
         $average['averageDuration'] = $average['averageDurationMin'] + $result[$i]['gameDuration'];
         $favoriteRole[] = $result[$i]['role'];
     }
-    $average['averageVision'] = floor($average['averageVision']/$matchAnalysedNumber);
-    $average['averageKills'] = floor($average['averageKills']/$matchAnalysedNumber);
-    $average['averageDeaths'] = floor($average['averageDeaths']/$matchAnalysedNumber);
+    $average['averageVision'] = number_format($average['averageVision']/$matchAnalysedNumber, 2);
+    $average['averageKills'] = number_format($average['averageKills']/$matchAnalysedNumber,  2);
+    $average['averageDeaths'] = number_format($average['averageDeaths']/$matchAnalysedNumber, 2);
     $average['averageGolds'] = floor($average['averageGolds']/$matchAnalysedNumber);
     $average['averageDuration'] = floor($average['averageDuration']/$matchAnalysedNumber);
     $average['averageDurationMin'] = floor($average['averageDuration']/60);

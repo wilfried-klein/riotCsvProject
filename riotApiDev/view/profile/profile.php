@@ -22,8 +22,19 @@
 				</div>
 			</div>
             <div id="separateurLeftSide"></div>
-            <h2>Stats utiles:</h2>
-            <!-- METTRE STATS ICI -->
+            <div id="infoMoyenne">
+                <h2>Stats moyenne utiles:</h2>
+                <!-- METTRE STATS ICI -->
+
+                <p><?php echo '<img src="img/KILLS.jpg" alt="img ward">' ;?>
+                <?php echo "Nombres de kills : " . $average['averageKills'];?></p>
+
+                <p><?php echo '<img src="img/DEATH.png" alt="img ward">' ;?>
+                 <?php echo "Nombre de morts : " . $average['averageDeaths'];?></p>
+
+                <p><?php echo '<img src="img/WARD.jpg" alt="img ward">' ;?>
+                <?php echo "Score de vision : " . $average['averageVision'];?></p>
+            </div>
 		</div>
 		<div class="main">
 			<div class="allInfos">
