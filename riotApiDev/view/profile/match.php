@@ -1,12 +1,14 @@
  <tr>
  	<td class="info1">
- 		<?php
- 		if($value['result'] == true){
- 			echo '<h3 style="color: #1217C0;">VICTOIRE</h3>';
- 		}else{
- 			echo '<h3 style="color: #C01712;">DÉFAITE</h3>';
- 		}
- 		?>
+        <div class="winOrLoose">
+            <?php
+            if($value['result'] == true){
+                echo '<img src="img/Victory.png" alt="img victoire">';
+            }else{
+                echo '<img src="img/Defeat.png" alt="img defaite">';
+            }
+            ?>
+        </div>
  		<div class="info1Global">
  			<div class="champEtSort">
  				<div class="champ">
