@@ -20,7 +20,10 @@
 					}
 					?>
 				</div>
-			</div>  
+			</div>
+            <div id="separateurLeftSide"></div>
+            <h2>Stats utiles:</h2>
+            <!-- METTRE STATS ICI -->
 		</div>
 		<div class="main">
 			<div class="allInfos">
