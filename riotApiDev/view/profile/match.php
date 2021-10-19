@@ -14,13 +14,13 @@
  					<p><?php echo $value['championName'];?></p>
  				</div>
  				<div class="summonerSpell">
- 					<img src="<?php echo $value['summonerSpell1']?>"/>
- 					<img src="<?php echo $value['summonerSpell2']?>"/>
+ 					<img src="<?php echo $value['summonerSpell1']?>" alt="img sort invocateur 1"/>
+ 					<img src="<?php echo $value['summonerSpell2']?>" alt="img sort invocateur 2"/>
  				</div>
  			</div>
  			<div class="runes">
- 				<img src="<?php echo $value['rune1Icon']?>"/>
- 				<img src="<?php echo $value['rune2Icon']?>"/>
+ 				<img src="<?php echo $value['rune1Icon']?>" alt="img rune 1"/>
+ 				<img src="<?php echo $value['rune2Icon']?>" alt="img rune 2"/>
  			</div>
  		</div>
  	</td>
@@ -42,7 +42,7 @@
  			<?php
  			for ($i=0; $i < 6; $i++) {
  				if(array_key_exists($i,$value['itemsIcon'])){
- 					echo '<img src="'. $value['itemsIcon'][$i].'">';
+ 					echo '<img src="'. $value['itemsIcon'][$i].'" alt="img objet">';
  				}
  			};
  			?>
@@ -54,21 +54,21 @@
  		<?php 
  		for ($g=0; $g < 5; $g++) {
  			echo "<div>";
- 			echo $value['summonerNameList'][$g] . '<img src="'. $value['summonerIconList'][$g].'">' . '<img src="'. $value['summonerIconList'][$g+5].'">' . $value['summonerNameList'][$g+5];
+ 			echo $value['summonerNameList'][$g] . '<img src="'. $value['summonerIconList'][$g].'" alt="icone du summoner">' . '<img src="'. $value['summonerIconList'][$g+5].'" alt="icone du summoner">' . $value['summonerNameList'][$g+5];
  			echo "</div>";
  		}
  		?>
  	</td>
 
  	<td class="info6">
- 		<form id='formCsv1' name='formCsv1' method="get" action="index.php" '>
+ 		<form id='formCsv1' name='formCsv1' method="get" action="index.php" >
  			<div class="style7">
  				<input type="hidden" name="action" value="getCsv">
  				<input type="hidden" name="nbGames" value="1">
  				<input type="hidden" name="summonerName" value="<?php echo $summonerName ?>">
  				<input type="hidden" name="server" value="<?php echo $server ?>">
- 				<input type="image" name="submit" src="img/telecharger.png" />
+ 				<input type="image" name="submit" src="img/telecharger.png" alt="img bouton telecharger" />
  			</div>
- 		</form> 
+ 		</form>
  	</td>
  </tr>
