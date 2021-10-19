@@ -89,7 +89,5 @@ foreach ($allMatchData as $matchData) {
 }
 header('Content-Type: text/csv Content-Disposition: attachment; filename="test.csv"');
 header('Content-Disposition: attachment; filename="test.csv"');
-file_put_contents('matchsData.csv', $csvContent);
-readfile('matchsData.csv');
-unlink('matchsData.csv');
+echo $csvContent;
 ?>

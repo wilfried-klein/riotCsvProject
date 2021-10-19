@@ -1,6 +1,6 @@
 <?php
-//Users\Wilfried\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.ph
-require_once ('C:\Users\Wilfried\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
+require_once ('/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/lib/File.php');
+//require_once ('C:\\Users\Wilfried\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php')
 require_once File::build_path(array("model","modelRiotApi.php"));
 $action = $_GET['action'];
 Routeur::$action();
