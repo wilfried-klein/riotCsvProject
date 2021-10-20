@@ -80,7 +80,7 @@
                <input type="hidden" name="nbGames" value="1">
                <input type="hidden" name="summonerName" value="<?php echo $summonerName ?>">
                <input type="hidden" name="server" value="<?php echo $server ?>">
-               <input type="image" name="submit" src="img/telecharger.png" alt="img bouton telecharger" />
+               <input class="downloaderCsvImage" type="image" name="submit" src="img/telecharger.png" alt="img bouton telecharger" />
            </div>
         </form>
     </td>
