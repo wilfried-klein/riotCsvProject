@@ -25,22 +25,25 @@
 			<div id="infoMoyenne">
 				<h2>Stats moyenne utiles:</h2>
 				<!-- METTRE STATS ICI -->
-
-				<p><?php echo '<img src="img/KILLS.jpg" alt="img ward">' ;?>
-				<?php echo "Nombres de kills : " . $average['averageKills'];?></p>
-
-				<p><?php echo '<img src="img/DEATH.png" alt="img ward">' ;?>
-				<?php echo "Nombre de morts : " . $average['averageDeaths'];?></p>
-
-				<p><?php echo '<img src="img/WARD.jpg" alt="img ward">' ;?>
-				<?php echo "Score de vision : " . $average['averageVision'];?></p>
+                <div class="stat">
+                    <img src="img/KILLS.jpg" alt="img kill">
+                    <p>Nombres de kills : <?php echo $average['averageKills'] ?> </p>
+                </div>
+                <div class="stat">
+                    <img src="img/DEATH.png" alt="img mort">
+                    <p>Nombres de morts : <?php echo $average['averageDeaths'] ?> </p>
+                </div>
+                <div class="stat">
+                    <img src="img/WARD.jpg" alt="img ward">
+                    <p>Score de vision : <?php echo $average['averageVision'] ?> </p>
+                </div>
 			</div>
 			<div id="separateurLeftSide"></div>
-			<div id="csvDownloader">
-				<p>Telecharger toutes vos données de vos dernier matchs</p>
+			<div class="csvDownloader">
+                <h2>Exporte tes données en CSV ici:</h2>
 				<form id='formCsv' name='formCsv' method="get" action="index.php" >
 					<fieldset>
-						<label for="game_number">Nombre de partie à exporter : </label>
+						<label for="game_number">Combien de parties ? </label>
 						<select name="nbGames" id="game_number">
 							<option value="10">10</option>
 							<option value="20">20</option>
@@ -54,7 +57,6 @@
 					<input class="downloaderCsvImage" type="image" name="submit" src="img/telecharger.png" alt="img bouton telecharger" />
 				</form>
 			</div>
-			<div id="separateurLeftSide"></div>
 		</div>
 		<div class="main">
 			<div class="allInfos"> 
