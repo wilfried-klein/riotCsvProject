@@ -1,0 +1,597 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"matc",
+				"matchAnalysedNumber"
+			],
+			[
+				"match",
+				"matchData"
+			],
+			[
+				"mat",
+				"matchAnalysedNumber"
+			],
+			[
+				"fil",
+				"filsD"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"fils",
+				"filsG"
+			],
+			[
+				"fi",
+				"filsG"
+			],
+			[
+				"to",
+				"toStringTrie"
+			],
+			[
+				"p",
+				"println"
+			],
+			[
+				"fore",
+				"forEach"
+			],
+			[
+				"pu",
+				"public"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"de",
+				"deplacer"
+			],
+			[
+				"read",
+				"readfile()"
+			],
+			[
+				"fo",
+				"foreach"
+			],
+			[
+				"head",
+				"header"
+			],
+			[
+				"html",
+				"htmlspecialchars()"
+			],
+			[
+				"req",
+				"require"
+			],
+			[
+				"arr",
+				"array()"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"a",
+				"a"
+			],
+			[
+				"_",
+				"$_GET"
+			],
+			[
+				"prin",
+				"print_r()"
+			],
+			[
+				"c",
+				"codeEquipe"
+			],
+			[
+				"code",
+				"codeSalarie"
+			],
+			[
+				"p_code",
+				"p_codeProjet"
+			],
+			[
+				"E",
+				"ELSE"
+			],
+			[
+				"p_c",
+				"p_codeProjet"
+			],
+			[
+				"V_",
+				"v_nb"
+			],
+			[
+				"p_",
+				"p_codeEquipe"
+			],
+			[
+				"A",
+				"AffecterSalarieEquie"
+			],
+			[
+				"codeS",
+				"codeSalarie"
+			],
+			[
+				"v",
+				"value"
+			],
+			[
+				"ma",
+				"Math"
+			],
+			[
+				"ch",
+				"chercheNoeudInterne"
+			],
+			[
+				"cher",
+				"recherche"
+			],
+			[
+				"sy",
+				"symetrise"
+			],
+			[
+				"toS",
+				"toStringAux"
+			],
+			[
+				"val",
+				"valeur"
+			],
+			[
+				"nb",
+				"nbFeuilles"
+			],
+			[
+				"Fils",
+				"filsD"
+			],
+			[
+				"pl",
+				"Polynome"
+			],
+			[
+				"co",
+				"coeff"
+			],
+			[
+				"mo",
+				"monterTelephone"
+			],
+			[
+				"Et",
+				"Etudiant"
+			],
+			[
+				"monter",
+				"monterDomicile"
+			],
+			[
+				"monterC",
+				"monterCodeNip"
+			],
+			[
+				"t",
+				"telephone"
+			],
+			[
+				"anne",
+				"annee_bac"
+			],
+			[
+				"lie",
+				"lieu_naissance"
+			],
+			[
+				"date",
+				"date_naissance"
+			],
+			[
+				"nom",
+				"nom_usuel"
+			],
+			[
+				"array_key",
+				"array_key_exists()"
+			],
+			[
+				"print",
+				"print_r()"
+			],
+			[
+				"ranking",
+				"rankingData"
+			],
+			[
+				"items",
+				"itemsIcon"
+			],
+			[
+				"des",
+				"descripteurSortie"
+			],
+			[
+				"ecr",
+				"ecriture_NL"
+			],
+			[
+				"ecriture",
+				"ecriture_entier"
+			],
+			[
+				"ecri",
+				"ecriture_SPACE"
+			],
+			[
+				"char",
+				"char_largeur"
+			],
+			[
+				"str",
+				"strlen"
+			],
+			[
+				"char_",
+				"char_longueur"
+			],
+			[
+				"single",
+				"single_instance"
+			],
+			[
+				"Ele",
+				"Element_new"
+			],
+			[
+				"st",
+				"stackStoredValue"
+			],
+			[
+				"St",
+				"Stack_pop"
+			],
+			[
+				"Stack",
+				"Stack_print"
+			],
+			[
+				"Sta",
+				"Stack"
+			],
+			[
+				"adr",
+				"adr_j"
+			],
+			[
+				"tur",
+				"turnLeft"
+			],
+			[
+				"voitu",
+				"voitures"
+			],
+			[
+				"voit",
+				"voiture2"
+			],
+			[
+				"array",
+				"array()"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"re",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"reinde",
+				"Indentation: Reindent Lines"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 218.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ann2/kleinw/Documents/algo-avancée/TD3_arbres/Arbres.java",
+		"/home/ann2/kleinw/Documents/algo-avancée/TD3_Abr/Abr.java",
+		"/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/view/profile/profile.php",
+		"/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/controller/controllerProfile.php",
+		"/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/controller/controllerCsv.php",
+		"/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/controller/routeur.php",
+		"/home/ann2/kleinw/.config/sublime-text/Packages/User/RunJava.sublime-build",
+		"/home/ann2/kleinw/public_html/projet_tutore/view/view.php",
+		"/home/ann2/kleinw/public_html/projet_tutore/controller/routeur.php",
+		"/home/ann2/kleinw/public_html/projet_tutore/view/formulaire/formulaire.php",
+		"/home/ann2/kleinw/Documents/algo-avancée/TD3_arbres/Abr.java",
+		"/home/ann2/kleinw/public_html/projet_tutore/css/style.css",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/CompositePattern/src/main/java/etud/Simulateur.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/CompositePattern/src/main/java/etud/Personne.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/CompositePattern/src/main/java/etud/Groupe.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/CompositePattern/src/main/java/etud/Entite.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/CompositePattern/src/main/java/etud/App.java",
+		"/home/ann2/kleinw/public_html/projet_tutore/lib/File.php",
+		"/home/ann2/kleinw/public_html/projet_tutore/view/profile/profile.php",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Famille/Simulateur.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package3/Simulateur.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Famille/Personne.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Groupe/Groupe.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package2/Personne.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package2/Famille.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package2/Simulateur.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package3/Personne.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package3/Groupe.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package1/Simulateur.java",
+		"/home/ann2/kleinw/q5-td4-wilfried-klein/renduJAVA/Package1/Personne.java",
+		"/home/ann2/kleinw/public_html/CSV/test.csv",
+		"/home/ann2/kleinw/public_html/riotApiDev/model/modelRiotApi.php",
+		"/home/ann2/kleinw/public_html/CSV/test.php",
+		"/home/ann2/kleinw/public_html/php_td5/lib/File.php",
+		"/home/ann2/kleinw/public_html/php_td5/model/ModelVoiture.php",
+		"/home/ann2/kleinw/public_html/php_td5/model/Model.php",
+		"/home/ann2/kleinw/public_html/php_td5/config/Conf.php",
+		"/home/ann2/kleinw/public_html/php_td5/controller/routeur.php",
+		"/home/ann2/kleinw/public_html/php_td5/controller/ControllerVoiture.php",
+		"/home/ann2/kleinw/public_html/php_td5/index.php",
+		"/home/ann2/kleinw/public_html/php_td5/view/error/duplicatedKey.php",
+		"/home/ann2/kleinw/public_html/php_td5/view/voiture/detail.php",
+		"/home/ann2/kleinw/public_html/php_td5/view/voiture/create.php",
+		"/home/ann2/kleinw/public_html/php_td5/view/voiture/list.php",
+		"/home/ann2/kleinw/public_html/php_td5/view/view.php",
+		"/home/ann2/kleinw/public_html/php_td5/ModelVoiture.php",
+		"/home/ann2/kleinw/public_html/php_td4/controller/routeur.php",
+		"/home/ann2/kleinw/public_html/php_td4/model/ModelVoiture.php",
+		"/home/ann2/kleinw/public_html/php_td4/controller/ControllerVoiture.php",
+		"/home/ann2/kleinw/public_html/php_td4/model/Model.php",
+		"/home/ann2/kleinw/public_html/PHP/formulaireVoiture.html",
+		"/home/ann2/kleinw/public_html/php_td4/view/error/duplicatedKey.php",
+		"/home/ann2/kleinw/public_html/php_td4/view/voiture/create.php",
+		"/home/ann2/kleinw/public_html/php_td4/view/voiture/detail.php",
+		"/home/ann2/kleinw/public_html/php_td4/view/voiture/list.php",
+		"/home/ann2/kleinw/Documents/algo-avancée/TD3_polynomes/Polynome.java",
+		"/home/ann2/kleinw/Documents/work.sql",
+		"/home/ann2/kleinw/Documents/algo-avancée/TD3_polynomes/main.java",
+		"/home/ann2/kleinw/Documents/algo-avancée/TD3_polynomes/Polynomes.java",
+		"/home/ann2/kleinw/q5-td3-wilfried-klein/renduJAVA/Package1/Etudiant.java",
+		"/home/ann2/kleinw/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/model/modelRiotApi.php",
+		"/home/ann2/kleinw/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/controller/controllerTest.php",
+		"/home/ann2/kleinw/Documents/archi S3/tp_img/src/tp1_copie.c",
+		"/home/ann2/kleinw/Documents/archi S3/tp_img/img/cosmic_jhin.pgm",
+		"/home/ann2/kleinw/Documents/archi S3/tp_img/img/cat.pgm",
+		"/home/ann2/kleinw/Documents/archi S3/tp_img/img/sortie.pgm",
+		"/home/ann2/kleinw/Documents/archi S3/TD2/pileLIFO.c",
+		"/home/ann2/kleinw/Documents/Modélisation mathématique/cercle.py",
+		"/home/ann2/kleinw/Documents/Modélisation mathématique/tetris.py",
+		"/home/ann2/kleinw/public_html/riotApiDev/test.php",
+		"/home/ann2/kleinw/public_html/riotApiDev/Api.php",
+		"/home/ann2/kleinw/public_html/riotApiDev/ApiAux.php",
+		"/home/ann2/kleinw/public_html/php_td4/ModelVoiture.php",
+		"/home/ann2/kleinw/public_html/php_td4/config/Conf.php",
+		"/home/ann2/kleinw/public_html/php_td3/formFindUtil.php",
+		"/home/ann2/kleinw/public_html/php_td3/Model.php",
+		"/home/ann2/kleinw/public_html/php_td3/testFindUtil.php",
+		"/home/ann2/kleinw/public_html/apilol/lol.php",
+		"/home/ann2/kleinw/public_html/apilol/formulaire.html",
+		"/home/ann2/kleinw/public_html/php_td3/Trajet.php",
+		"/home/ann2/kleinw/public_html/php_td3/voiture.php",
+		"/home/ann2/kleinw/public_html/php_td3/Utilisateur.php",
+		"/home/ann2/kleinw/public_html/php_TD2/lirevoiture.php",
+		"/home/ann2/kleinw/public_html/riotApiDev/api.php",
+		"/home/ann2/kleinw/public_html/php_td3/testConf.php",
+		"/home/ann2/kleinw/Documents/archi S3/tp_img/include/image.h",
+		"/home/ann2/kleinw/public_html/php_td3/Conf.php",
+		"/home/ann2/kleinw/Documents/archi S3/src-student/commun/td3.h",
+		"/home/ann2/kleinw/Documents/archi S3/src-student/commun/handlers.c",
+		"/home/ann2/kleinw/Documents/archi S3/src-student/commun/palette.c",
+		"/home/ann2/kleinw/Documents/archi S3/src-student/etape1/codage.c",
+		"/home/ann2/kleinw/Images/cosmic_jhin.pgm",
+		"/home/ann2/kleinw/Documents/archi S3/TD2/prog1.c",
+		"/home/ann2/kleinw/Documents/archi S3/TD2/prog2.c",
+		"/home/ann2/kleinw/Documents/archi S3/TD2/prog3.c",
+		"/home/ann2/kleinw/Documents/archi S3/TD2/prog4.c",
+		"/home/ann2/kleinw/Documents/archi S3/TD2/prog5.c",
+		"/home/ann2/kleinw/q5-td2-wilfried-klein/Package1/Singleton.java",
+		"/home/ann2/kleinw/q5-td2-wilfried-klein/java/Package1/Singleton.java",
+		"/home/ann2/kleinw/q5-td2-wilfried-klein/java/singleton.java",
+		"/home/ann2/kleinw/public_html/php_td3/formulaireVoiture.html",
+		"/home/ann2/kleinw/public_html/php_td3/creerVoiture.php",
+		"/home/ann2/kleinw/public_html/php_td3/testModel.php",
+		"/home/ann2/kleinw/public_html/php_td3/lirevoiture.php",
+		"/home/ann2/kleinw/public_html/PHP/voiture.php",
+		"/home/ann2/kleinw/Documents/algo-avancée/DessinFractale.java",
+		"/home/ann2/kleinw/Documents/algo-avancée/Turtle.java",
+		"/home/ann2/kleinw/public_html/PHP/creerVoiture.php",
+		"/home/ann2/kleinw/public_html/page1.html",
+		"/home/ann2/kleinw/public_html/PHP/echo.php",
+		"/home/ann2/kleinw/public_html/PHP/testVoiture.php",
+		"/home/ann2/kleinw/public_html/PHP/covoiturage/utilisateur.php",
+		"/home/ann2/kleinw/public_html/PHP/covoiturage/trajet.php",
+		"/home/ann2/kleinw/Documents/archi S3/TD1/prog3.c",
+		"/home/ann2/kleinw/Documents/archi S3/TD1/prog2.c"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 107.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/RunJava.sublime-build",
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/public_html/php_TD2/lirevoiture.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 79.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
