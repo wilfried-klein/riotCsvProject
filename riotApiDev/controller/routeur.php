@@ -30,6 +30,9 @@ class Routeur{
 		require(File::build_path(array("view","view.php")));
 	}
 	public static function getCsv(){
+		$summonerName = $_GET['summonerName'];
+		$server = $_GET['server'];
+		$gameNumber = $_GET['nbGames'];
 		require (File::build_path(array("controller","controllerCsv.php")));
 	}
 }

@@ -1,6 +1,4 @@
 <?php
-$summonerName = $_GET['summonerName'];
-$server = $_GET['server'];
 $language = 'fr_FR';
 
 try {
