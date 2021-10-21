@@ -47,7 +47,9 @@
                 </div>
                 <div class="stat">
                     <img src="img/ROLE.png" alt="img role">
-                    <p>Rôle préféré : <?php echo $average['favoriteRole'] ?> </p>
+                    <p>Rôle préféré : <?php echo  $favoriteRole; ?> </p>
+
+
                 </div>
             </div>
             <div id="separateurLeftSide"></div>
