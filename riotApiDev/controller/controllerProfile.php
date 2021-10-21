@@ -1,5 +1,9 @@
 <?php
+$summonerName = $_GET['summonerName'];
+$server = $_GET['server'];
 $language = 'fr_FR';
+
+
 
 try {
     $region = ModelRiotApi::getRegionByServer($server);
@@ -106,6 +110,20 @@ try {
 ********************************************************************************************************************************************
 ********************************************************************************************************************************************
 */
+
+function msInMinAndSec($milliseconds){
+    $secondes = floor( $milliseconds / 1000);
+    $minutes = floor($secondes / 60);
+
+    $secondes = $secondes % 60;
+    $minutes = $minutes % 60;
+
+    $format = '%u Min %02u';
+    $time = sprintf($format, $minutes, $secondes);
+
+    return $time;
+}
+
 $result = array();
 for ($numG=0; $numG < $matchAnalysedNumber; $numG++) {
     try {
@@ -208,14 +226,20 @@ for ($numG=0; $numG < $matchAnalysedNumber; $numG++) {
     } catch (Exception $e) {
         die();
     }
-    if(array_key_exists('gameEndTimestamp',$matchData['info'])){
+    //if(array_key_exists('gameEndTimestamp',$matchData['info'])){
+
+    if(array_key_exists('gameDuration',$matchData['info'])){
+        //$return['gameDuration'] = $matchData['info']['gameDuration'];
         $return['gameDuration'] = $matchData['info']['gameDuration'];
-        $return['gameDurationMin'] = round($matchData['info']['gameDuration']/60);
-        $return['gameDurationSeconde'] = $matchData['info']['gameDuration']%60;
+        $return['gameDurationMinAndSec'] = msInMinAndSec($matchData['info']['gameDuration']);
+        //$return['gameDurationMin'] = round($matchData['info']['gameDuration']/60);
+        //$return['gameDurationSeconde'] = $matchData['info']['gameDuration']%60;
     }else{
+        //$return['gameDuration'] = $matchData['info']['gameDuration']/1000;
+        $return['gameDurationMinAndSec'] = msInMinAndSec($matchData['info']['gameDuration']/1000);
         $return['gameDuration'] = $matchData['info']['gameDuration']/1000;
-        $return['gameDurationMin'] = round(($matchData['info']['gameDuration']/1000)/60);
-        $return['gameDurationSeconde'] = ($matchData['info']['gameDuration']/1000)%60;
+        //$return['gameDurationMin'] = round(($matchData['info']['gameDuration']/1000)/60);
+        //$return['gameDurationSeconde'] = ($matchData['info']['gameDuration']/1000)%60;
     }
     foreach ($queueData as $value) {
         if($value['queueId'] == $matchData['info']['queueId']) {
@@ -264,6 +288,7 @@ for ($numG=0; $numG < $matchAnalysedNumber; $numG++) {
     $return['itemsIcon'] = $itemsIcon;
     $return['goldEarned'] = $summonerMatchData[$currentSummonerIndex]['goldEarned'];
     $return['role'] = $summonerMatchData[$currentSummonerIndex]['teamPosition'];
+
     $result[] = $return;
     try {
         $summonerIcon = ModelRiotApi::getProfileIconAsset($version,$summonerInfo['profileIconId']);
@@ -279,8 +304,8 @@ if($matchAnalysedNumber > 0){
         'averageDeaths' => 0,
         'averageGolds' => 0,
         'averageDuration' => 0,
-        'averageDurationMin' => 0,
-        'averageDurationSec' => 0,
+        //'averageDurationMin' => 0,
+        //'averageDurationSec' => 0,
         'favoriteRole' => "",
     );
     $favoriteRole = array();
@@ -289,21 +314,30 @@ if($matchAnalysedNumber > 0){
         $average['averageKills'] = $average['averageKills'] + $result[$i]['kills'];
         $average['averageDeaths'] = $average['averageDeaths'] + $result[$i]['deaths'];
         $average['averageGolds'] = $average['averageGolds'] + $result[$i]['goldEarned'];
-        $average['averageDuration'] = $average['averageDurationMin'] + $result[$i]['gameDuration'];
+        $average['averageDuration'] = $average['averageDuration'] + $result[$i]['gameDuration'];
         $favoriteRole[] = $result[$i]['role'];
     }
     $average['averageVision'] = number_format($average['averageVision']/$matchAnalysedNumber, 2);
     $average['averageKills'] = number_format($average['averageKills']/$matchAnalysedNumber,  2);
     $average['averageDeaths'] = number_format($average['averageDeaths']/$matchAnalysedNumber, 2);
     $average['averageGolds'] = floor($average['averageGolds']/$matchAnalysedNumber);
-    $average['averageDuration'] = floor($average['averageDuration']/$matchAnalysedNumber);
-    $average['averageDurationMin'] = floor($average['averageDuration']/60);
-    $average['averageDurationSec'] = $average['averageDuration']%60;
+
+    $average['averageDuration'] = msInMinAndSec($average['averageDuration']/10);
+    //$average['averageDurationMin'] = floor($average['averageDuration']/60);
+    //$average['averageDurationSec'] = $average['averageDuration']%60;
     //favorite role :
     $counts = array_count_values($favoriteRole);
     arsort($counts);
     $average['favoriteRole'] = array_keys($counts)[0];
+
+
+    /*
+     ** convertir millisecondes en Xmin Ysec :
+     */
+
+
+
 }else{
     $average = -1;
-} 
+}
 ?>
