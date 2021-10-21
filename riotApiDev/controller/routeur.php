@@ -1,6 +1,6 @@
 <?php
-//require_once ('C:\MAMP\htdocs\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
-require_once ('/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/lib/File.php');
+require_once ('C:\MAMP\htdocs\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
+//require_once ('/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/lib/File.php');
 //require_once ('C:\\Users\Wilfried\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
 //require_once ('/home/ann2/francoisw/public_html/projetLol/riotApiDev/lib/File.php');
 require_once File::build_path(array("model","modelRiotApi.php"));
@@ -14,8 +14,8 @@ Routeur::$action();
 class Routeur{
 	// On recupère l'action passée dans l'URL
 	public static function profile() {
-		$_GET['summonerName'];
-		$_GET['server'];
+		$summonerName = $_GET['summonerName'];
+		$server = $_GET['server'];
 		require File::build_path(array("controller","controllerProfile.php"));
 		$controller='profile';
 		$view='profile';

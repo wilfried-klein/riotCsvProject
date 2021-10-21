@@ -18,7 +18,7 @@
 	//les métadonnées sont au début et indique la liste des participants
 	//l'id correspondant au joueur sont a la fin.
 class ModelRiotApi{
-	private static $api_key = "RGAPI-4e8fba46-10bc-4239-96c9-70553c607409";
+	private static $api_key = "RGAPI-7f853f0c-a6fd-40f8-a500-8c9222541a88";
 
 	private static $ServerRegionEquivalence = array(
 		'na1'  => 'americas',
