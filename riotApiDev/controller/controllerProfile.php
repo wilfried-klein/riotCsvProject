@@ -74,7 +74,7 @@ try {
     }
 }
 try {
-    $partieNumber = 10;
+    $partieNumber = 1;
     $lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,$partieNumber);
 } catch (Exception $e) {
     $errorCode = $e->getMessage();
@@ -111,8 +111,7 @@ try {
 ********************************************************************************************************************************************
 */
 
-function msInMinAndSec($milliseconds){
-    $secondes = floor( $milliseconds / 1000);
+function msInMinAndSec($secondes){
     $minutes = floor($secondes / 60);
 
     $secondes = $secondes % 60;
@@ -228,7 +227,7 @@ for ($numG=0; $numG < $matchAnalysedNumber; $numG++) {
     }
     //if(array_key_exists('gameEndTimestamp',$matchData['info'])){
 
-    if(array_key_exists('gameDuration',$matchData['info'])){
+    if(array_key_exists('gameEndTimestamp',$matchData['info'])){
         //$return['gameDuration'] = $matchData['info']['gameDuration'];
         $return['gameDuration'] = $matchData['info']['gameDuration'];
         $return['gameDurationMinAndSec'] = msInMinAndSec($matchData['info']['gameDuration']);
@@ -318,11 +317,11 @@ if($matchAnalysedNumber > 0){
         $favoriteRole[] = $result[$i]['role'];
     }
     $average['averageVision'] = number_format($average['averageVision']/$matchAnalysedNumber, 2);
-    $average['averageKills'] = number_format($average['averageKills']/$matchAnalysedNumber,  2);
+    $average['averageKills'] = number_format($average['averageKills']/$matchAnalysedNumber, 2);
     $average['averageDeaths'] = number_format($average['averageDeaths']/$matchAnalysedNumber, 2);
     $average['averageGolds'] = floor($average['averageGolds']/$matchAnalysedNumber);
 
-    $average['averageDuration'] = msInMinAndSec($average['averageDuration']/10);
+    $average['averageDuration'] = msInMinAndSec($average['averageDuration']/$matchAnalysedNumber);
     //$average['averageDurationMin'] = floor($average['averageDuration']/60);
     //$average['averageDurationSec'] = $average['averageDuration']%60;
     //favorite role :
