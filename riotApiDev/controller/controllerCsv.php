@@ -1,45 +1,24 @@
 <?php
-$summonerName = $_GET['summonerName'];
-$server = $_GET['server'];
-$gameNumber = $_GET['nbGames'];
 $language = 'fr_FR';
 
 //obtention de la région correspondant au serveur
 try {
 	$region = ModelRiotApi::getRegionByServer($server);
 } catch (Exception $e) {
-	die($e->getMessage());
+	return(array("regionByServer",$e->getMessage()));
 }
 //obtention des données de l'invocateur
 try {
 	$summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
 } catch (Exception $e) {
-	$errorCode = $e->getMessage();
-	if ($errorCode == "403") {
-		die("Cette invocateur n'existe pas");
-	}
-	if ($errorCode == "429") {
-		die("Trop de demande,veuiller reéssayer");
-	}
-	if($errorCode == "503"){
-		die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-	}
+	return(array("summonerInfoBySummonerName",$e->getMessage()));
 }
 $summonerPuuid = $summonerInfo['puuid'];
 
 try {
 	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,null,null,0,$gameNumber);
 } catch (Exception $e) {
-	$errorCode = $e->getMessage();
-	if ($errorCode == "403") {
-		die("Cette invocateur n'existe pas");
-	}
-	if ($errorCode == "429") {
-		die("Trop de demande,veuiller reéssayer");
-	}
-	if($errorCode == "503"){
-		die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-	}
+	return(array("matchByPuuid",$e->getMessage()));
 }
 //array for all matchs
 $allMatchData = array();
@@ -49,16 +28,7 @@ foreach ($lastMatchsID as $matchID) {
 	try {
 		$matchData = ModelRiotApi::getMatchData($matchID,$region);
 	} catch (Exception $e) {
-		$errorCode = $e->getMessage();
-		if ($errorCode == "403") {
-			die("Le match demandé n'existe pas");
-		}
-		if ($errorCode == "429") {
-			die("Trop de demande,veuiller reéssayer");
-		}
-		if($errorCode == "503"){
-			die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-		}
+		return(array("matchData",$e->getMessage()));
 	}
 	//get summoner index
 	$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
@@ -87,7 +57,5 @@ foreach ($allMatchData as $matchData) {
 	$csvContent = $csvContent . "\n";
 	$csvContent = $csvContent .  implode(",", $matchData) . "\n";
 }
-header('Content-Type: text/csv Content-Disposition: attachment; filename="test.csv"');
-header('Content-Disposition: attachment; filename="gameData.csv"');
-echo $csvContent;
+return false;
 ?>

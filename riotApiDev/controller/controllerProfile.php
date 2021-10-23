@@ -5,22 +5,22 @@ $partieNumber = 10;
 try {
     $region = ModelRiotApi::getRegionByServer($server);
 } catch (Exception $e) {
-    die($e->getMessage());
+    return(array("regionByServer",$e->getMessage()));
 }
 try {
     $version = ModelRiotApi::getVersionData()[0];
 } catch (Exception $e) {
-    die();
+    return(array("versionData",$e->getMessage()));
 }
 try {
     $summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
 } catch (Exception $e) {
-    die();
+    return(array("summonerInfoBySummonerName",$e->getMessage()));
 }
 try {
     $summonerIcon = ModelRiotApi::getProfileIconAsset($version,$summonerInfo['profileIconId']);
 } catch (Exception $e) {
-    die("erreur 261");
+    return(array("profileIconAsset",$e->getMessage()));
 }
 try {
     $rankingData = ModelRiotApi::getLeagueDatabySummonerId($summonerInfo['id'], $server);
@@ -30,7 +30,7 @@ try {
         }
     }
 } catch (Exception $e) {
-    die();
+    return(array("leagueDatabySummonerId",$e->getMessage()));
 }
 if(isset($rankingInfo)){
     $tier = $rankingInfo['tier'];
@@ -46,35 +46,35 @@ if(isset($rankingInfo)){
 try {
     $rankedEmblems = ModelRiotApi::getRankedEmblems($tier,$rank);
 } catch (Exception $e) {
-    die();
+    return(array("rankedEmblems",$e->getMessage()));
 }
 try {
     $lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerInfo['puuid'],$region,null,null,null,null,0,$partieNumber);
 } catch (Exception $e) {
-    die();
+    return(array("matchByPuuid",$e->getMessage()));
 }
 $matchAnalysedNumber = count($lastMatchsID);
 try {
     $summonerSpellData = ModelRiotApi::getSummonerSpellsData($version,$language)['data'];
 } catch (Exception $e) {
-    die();
+    return(array("summonerSpellData",$e->getMessage()));
 }
 try {
     $runeData = ModelRiotApi::getRunesData($version,$language);
 } catch (Exception $e) {
-    die();
+    return(array("runesData",$e->getMessage()));
 }
 try {
     $queueData = ModelRiotApi::getQueuesData();
 } catch (Exception $e) {
-    die();
+    return(array("queusData",$e->getMessage()));
 }
 $result;
 for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
     try {
         $matchData = ModelRiotApi::getMatchData($lastMatchsID[$nbG],$region);
     } catch (Exception $e) {
-        die();
+        return(array("matchData",$e->getMessage()));
     }
     $currentSummonerIndex = array_search($summonerInfo['puuid'], $matchData['metadata']['participants']);
     $summonerMatchData = $matchData['info']['participants'];
@@ -82,20 +82,17 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
         $soloSummonerInfo = $summonerMatchData[$i];
         try {
             $result[$nbG]['summonerIconList'][$i] = ModelRiotApi::getChampionSquareAsset($version,$summonerMatchData[$i]['championName']);
-            //$summonerIconList[$i] = ModelRiotApi::getChampionSquareAsset($version,$summonerMatchData[$i]['championName']);
         } catch (Exception $e) {
-            die();
+            return(array("championSquareAsset",$e->getMessage()));
         }
         $result[$nbG]['summonerNameList'][$i] = $soloSummonerInfo['summonerName'];
     }
     $soloSummonerInfo = $summonerMatchData[$currentSummonerIndex];
     try {
         $result[$nbG]['championName'] = $soloSummonerInfo['championName'];
-        //$result[$nbG]['championName'] = $soloSummonerInfo['championName'];
         $result[$nbG]['championIcon'] = ModelRiotApi::getChampionSquareAsset($version,$result[$nbG]['championName']);
-        //$result[$nbG]['championIcon'] = ModelRiotApi::getChampionSquareAsset($version,$result[$nbG]['championName']);
     } catch (Exception $e) {
-        die();
+        return(array("championSquareAsset",$e->getMessage()));
     }
     foreach ($summonerSpellData as $value) {
         if($value['key'] == $soloSummonerInfo['summoner1Id']){
@@ -107,8 +104,6 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
             $result[$nbG]['summonerSpell2'] = ModelRiotApi::getSummonerSpellAsset($version,$value['image']['full']);
         }
     }
-        //icones des runes
-        //obtention du chemin vers l'image de la rune
     $rune1 = $soloSummonerInfo['perks']['styles'][0]['selections'][0]['perk'];
     $branch = $soloSummonerInfo['perks']['styles'][0]['style'];
     try {
@@ -127,7 +122,7 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
             }
         }
     } catch (Exception $e) {
-        die();
+        return(array("runeAsset",$e->getMessage()));
     }
     $rune2 = $soloSummonerInfo['perks']['styles'][1]['style'];
     try {
@@ -138,7 +133,7 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
             }
         }
     } catch (Exception $e) {
-        die();
+        return(array("runeAsset",$e->getMessage()));
     }
     if(array_key_exists('gameEndTimestamp',$matchData['info'])){
         $result[$nbG]['gameDuration'] = $matchData['info']['gameDuration'];
@@ -168,13 +163,11 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
         }
         $result[$nbG]['wardIcon'] = ModelRiotApi::getItemAsset($version,$soloSummonerInfo["item6"]);
     } catch (Exception $e) {
-        die();
+        return(array("itemsAsset",$e->getMessage()));
     }
     $result[$nbG]['goldEarned'] = $soloSummonerInfo['goldEarned'];
     $result[$nbG]['role'] = $soloSummonerInfo['teamPosition'];
 }
-//moyenne
-
 if($matchAnalysedNumber > 0){
     $favoriteRole;
     $average = array(
@@ -185,7 +178,6 @@ if($matchAnalysedNumber > 0){
         'averageDuration' => 0,
         'favoriteRole' => "",
     );
-
     for ($i=0; $i < $matchAnalysedNumber; $i++) {
         $average['averageVision'] = $average['averageVision'] + $result[$i]['visionScore'];
         $average['averageKills'] = $average['averageKills'] + $result[$i]['kills'];
@@ -199,7 +191,6 @@ if($matchAnalysedNumber > 0){
     $average['averageDeaths'] = number_format($average['averageDeaths']/$matchAnalysedNumber, 2);
     $average['averageGolds'] = floor($average['averageGolds']/$matchAnalysedNumber);
     $average['averageDuration'] = msInMinAndSec($average['averageDuration']/$matchAnalysedNumber);
-    
     $counts = array_count_values($favoriteRole);
     arsort($counts);
     if (!function_exists('array_key_first')) {
@@ -210,11 +201,8 @@ if($matchAnalysedNumber > 0){
             }
             return NULL;
         }
-
     }
-
     $favoriteRole = array_key_first($counts);
-
     if($favoriteRole=="BOTTOM"){
         $favoriteRole="Botlane";
     }
@@ -233,8 +221,6 @@ if($matchAnalysedNumber > 0){
 }else{
     $average = -1;
 }
-
-
 function msInMinAndSec($secondes){
     $minutes = floor($secondes / 60);
 
@@ -246,4 +232,5 @@ function msInMinAndSec($secondes){
 
     return $time;
 }
+return false;
 ?>

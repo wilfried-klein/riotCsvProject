@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 //supprimer pour afficher les erreurs
-//error_reporting(0);
+error_reporting(0);
 //04/10/2021
 //ajout du getter pour données des runes
 //images des runes
@@ -50,15 +50,15 @@ class ModelRiotApi{
     $type = {ranked,normal,tourney,tutorial}
     */
     private static function doHttpRequest($url){
-        $response = file_get_contents($url);
-        if($response == false){
+        $content = file_get_contents($url);
+        if(!$content){
             throw new Exception("404");
         }else{
-            $responseCode = substr(get_headers($url)[0], 9, 3);
-            if($responseCode != "200"){
-                throw new Exception($responseCode);
+            $response_code = substr($http_response_header[0],9,-3);
+            if($response_code != '200'){
+                throw new Exception($response_code);
             }else{
-                return $response;
+                return $content;
             }
         }
     }
@@ -369,7 +369,7 @@ class ModelRiotApi{
         if(array_key_exists($server,ModelRiotApi::$ServerRegionEquivalence)){
             return ModelRiotApi::$ServerRegionEquivalence[$server];
         }else{
-            throw new Exception("ServerNotExist");
+            throw new Exception('404');
         }
 
     }
