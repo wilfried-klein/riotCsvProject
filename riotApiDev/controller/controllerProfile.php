@@ -1,6 +1,6 @@
 <?php
 $language = 'fr_FR';
-$partieNumber = 10;
+$partieNumber = 2;
 
 try {
     $region = ModelRiotApi::getRegionByServer($server);
@@ -8,17 +8,18 @@ try {
     return(array("regionByServer",$e->getMessage()));
 }
 try {
-    $version = ModelRiotApi::getVersionData()[0];
+    $versionList = ModelRiotApi::getVersionData();
 } catch (Exception $e) {
     return(array("versionData",$e->getMessage()));
 }
+$currentVersion = $versionList[0];
 try {
     $summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
 } catch (Exception $e) {
     return(array("summonerInfoBySummonerName",$e->getMessage()));
 }
 try {
-    $summonerIcon = ModelRiotApi::getProfileIconAsset($version,$summonerInfo['profileIconId']);
+    $summonerIcon = ModelRiotApi::getProfileIconAsset($currentVersion,$summonerInfo['profileIconId']);
 } catch (Exception $e) {
     return(array("profileIconAsset",$e->getMessage()));
 }
@@ -55,12 +56,12 @@ try {
 }
 $matchAnalysedNumber = count($lastMatchsID);
 try {
-    $summonerSpellData = ModelRiotApi::getSummonerSpellsData($version,$language)['data'];
+    $summonerSpellData = ModelRiotApi::getSummonerSpellsData($currentVersion,$language)['data'];
 } catch (Exception $e) {
     return(array("summonerSpellData",$e->getMessage()));
 }
 try {
-    $runeData = ModelRiotApi::getRunesData($version,$language);
+    $runeData = ModelRiotApi::getRunesData($currentVersion,$language);
 } catch (Exception $e) {
     return(array("runesData",$e->getMessage()));
 }
@@ -76,12 +77,13 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
     } catch (Exception $e) {
         return(array("matchData",$e->getMessage()));
     }
+    $matchVersion = explode(".",$matchData['info']['gameVersion'])[0] .".".explode(".",$matchData['info']['gameVersion'])[1] . ".1";
     $currentSummonerIndex = array_search($summonerInfo['puuid'], $matchData['metadata']['participants']);
     $summonerMatchData = $matchData['info']['participants'];
     for($i = 0; $i < 10; $i++) {
         $soloSummonerInfo = $summonerMatchData[$i];
         try {
-            $result[$nbG]['summonerIconList'][$i] = ModelRiotApi::getChampionSquareAsset($version,$summonerMatchData[$i]['championName']);
+            $result[$nbG]['summonerIconList'][$i] = ModelRiotApi::getChampionSquareAsset($matchVersion,$summonerMatchData[$i]['championName']);
         } catch (Exception $e) {
             return(array("championSquareAsset",$e->getMessage()));
         }
@@ -90,18 +92,18 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
     $soloSummonerInfo = $summonerMatchData[$currentSummonerIndex];
     try {
         $result[$nbG]['championName'] = $soloSummonerInfo['championName'];
-        $result[$nbG]['championIcon'] = ModelRiotApi::getChampionSquareAsset($version,$result[$nbG]['championName']);
+        $result[$nbG]['championIcon'] = ModelRiotApi::getChampionSquareAsset($matchVersion,$result[$nbG]['championName']);
     } catch (Exception $e) {
         return(array("championSquareAsset",$e->getMessage()));
     }
     foreach ($summonerSpellData as $value) {
         if($value['key'] == $soloSummonerInfo['summoner1Id']){
-            $result[$nbG]['summonerSpell1'] = ModelRiotApi::getSummonerSpellAsset($version,$value['image']['full']);
+            $result[$nbG]['summonerSpell1'] = ModelRiotApi::getSummonerSpellAsset($matchVersion,$value['image']['full']);
         }
     }
     foreach ($summonerSpellData as $value) {
         if($value['key'] == $soloSummonerInfo['summoner2Id']){
-            $result[$nbG]['summonerSpell2'] = ModelRiotApi::getSummonerSpellAsset($version,$value['image']['full']);
+            $result[$nbG]['summonerSpell2'] = ModelRiotApi::getSummonerSpellAsset($matchVersion,$value['image']['full']);
         }
     }
     $rune1 = $soloSummonerInfo['perks']['styles'][0]['selections'][0]['perk'];
@@ -158,10 +160,10 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
     try {
         for ($i=0; $i < 6; $i++) {
             if($soloSummonerInfo["item$i"] != "0"){
-                $result[$nbG]['itemsIcon'][] = ModelRiotApi::getItemAsset($version,$soloSummonerInfo["item$i"]);
+                $result[$nbG]['itemsIcon'][] = ModelRiotApi::getItemAsset($matchVersion,$soloSummonerInfo["item$i"]);
             }
         }
-        $result[$nbG]['wardIcon'] = ModelRiotApi::getItemAsset($version,$soloSummonerInfo["item6"]);
+        $result[$nbG]['wardIcon'] = ModelRiotApi::getItemAsset($matchVersion,$soloSummonerInfo["item6"]);
     } catch (Exception $e) {
         return(array("itemsAsset",$e->getMessage()));
     }

@@ -20,10 +20,11 @@ try {
 } catch (Exception $e) {
 	return(array("matchByPuuid",$e->getMessage()));
 }
+$matchAnalysedNumber = count($lastMatchsID);
 //array for all matchs
-$allMatchData = array();
+$result;
 //get Data for $summonerName for each match
-foreach ($lastMatchsID as $matchID) {
+for($nbG=0; $nbG < $matchAnalysedNumber; $i++) {
 	//getMatchData
 	try {
 		$matchData = ModelRiotApi::getMatchData($matchID,$region);
@@ -33,20 +34,19 @@ foreach ($lastMatchsID as $matchID) {
 	//get summoner index
 	$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
 	//get alls datas for current summoner on an array
-	$dataOfCurrentSummoner = $matchData['info']['participants'][$currentSummonerIndex];
-	$runeDataOfCurrentSummoner = $dataOfCurrentSummoner['perks'];
-	unset($dataOfCurrentSummoner['perks']);
+	$result[$nbG] = $matchData['info']['participants'][$currentSummonerIndex];
+	$runeDataOfCurrentSummoner = $result[$nbG]['perks'];
+	unset($result[$nbG]['perks']);
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
-	$dataOfCurrentSummoner['matchId'] = $matchID;
-	$dataOfCurrentSummoner['gameStartTimestamp'] = $matchData['info']['gameCreation'];
+	$result[$nbG]['matchId'] = $matchID;
+	$result[$nbG]['gameStartTimestamp'] = $matchData['info']['gameCreation'];
 	if(array_key_exists('gameEndTimestamp', $matchData['info'])){
-		$dataOfCurrentSummoner['gameDuration'] = $matchData['info']['gameDuration'];
-		$dataOfCurrentSummoner['gameEndTimestamp'] = $matchData['info']['gameEndTimestamp'];
+		$result[$nbG]['gameDuration'] = $matchData['info']['gameDuration'];
+		$result[$nbG]['gameEndTimestamp'] = $matchData['info']['gameEndTimestamp'];
 	}else{
-		$dataOfCurrentSummoner['gameDuration'] = $matchData['info']['gameDuration']/1000;
-		$dataOfCurrentSummoner['gameEndTimestamp'] = -1;
+		$result[$nbG]['gameDuration'] = $matchData['info']['gameDuration']/1000;
+		$result[$nbG]['gameEndTimestamp'] = -1;
 	}
-	$allMatchData[] = $dataOfCurrentSummoner;
 }
 //conversion vers CSV
 $csvContent = "";
