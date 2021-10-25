@@ -1,6 +1,6 @@
 <?php
 $language = 'fr_FR';
-$partieNumber = 2;
+$partieNumber = 10;
 
 try {
     $region = ModelRiotApi::getRegionByServer($server);
@@ -18,6 +18,7 @@ try {
 } catch (Exception $e) {
     return(array("summonerInfoBySummonerName",$e->getMessage()));
 }
+$summonerLevel = $summonerInfo['summonerLevel'];
 try {
     $summonerIcon = ModelRiotApi::getProfileIconAsset($currentVersion,$summonerInfo['profileIconId']);
 } catch (Exception $e) {

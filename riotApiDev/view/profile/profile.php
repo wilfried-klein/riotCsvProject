@@ -2,7 +2,7 @@
     <div class="top">
         <div class="summonerInfo">
             <img src="<?php echo $summonerIcon?>" alt="logo de l'invocateur"/>
-            <span id="lvl">375</span>
+            <span id="lvl"><?php echo $summonerLevel ?></span>
             <p id="summonerName"><?php echo $summonerName ?></p>
         </div>
     </div>
