@@ -14,7 +14,12 @@ try {
 }
 $currentVersion = $versionList[0];
 try {
-    $summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
+    if(isset($summonerName)){
+        $summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
+    }elseif(isset($summonerPuuid)){
+        $summonerInfo = ModelRiotApi::getSummonerInfoByPuuid($summonerPuuid, $server);
+        $summonerName = $summonerInfo['name'];
+    }
 } catch (Exception $e) {
     return(array("summonerInfoBySummonerName",$e->getMessage()));
 }
@@ -78,6 +83,7 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
     } catch (Exception $e) {
         return(array("matchData",$e->getMessage()));
     }
+    $result[$nbG]['matchId'] = strtoupper($server)."_".$matchData['info']['gameId'];
     $matchVersion = explode(".",$matchData['info']['gameVersion'])[0] .".".explode(".",$matchData['info']['gameVersion'])[1] . ".1";
     $currentSummonerIndex = array_search($summonerInfo['puuid'], $matchData['metadata']['participants']);
     $summonerMatchData = $matchData['info']['participants'];
@@ -89,6 +95,7 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
             return(array("championSquareAsset",$e->getMessage()));
         }
         $result[$nbG]['summonerNameList'][$i] = $soloSummonerInfo['summonerName'];
+        $result[$nbG]['summonerPuuid'][$i] = $soloSummonerInfo['puuid'];
     }
     $soloSummonerInfo = $summonerMatchData[$currentSummonerIndex];
     try {

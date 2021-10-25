@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 //supprimer pour afficher les erreurs
-//error_reporting(0);
+error_reporting(0);
 //04/10/2021
 //ajout du getter pour données des runes
 //images des runes
@@ -56,7 +56,7 @@ class ModelRiotApi{
         }else{
             $response_code = substr($http_response_header[0],9,-3);
             if($response_code != '200'){
-                throw new Exception($response_code);
+                throw new Exception(get_headers($url)[0],9,3);
             }else{
                 return $content;
             }
