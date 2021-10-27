@@ -1,28 +1,26 @@
 <?php
 $language = 'fr_FR';
-
-//obtention de la région correspondant au serveur
-try {
-	$region = ModelRiotApi::getRegionByServer($server);
-} catch (Exception $e) {
-	return(array("regionByServer",$e->getMessage()));
-}
-//obtention des données de l'invocateur
-try {
-	$summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
-} catch (Exception $e) {
-	return(array("summonerInfoBySummonerName",$e->getMessage()));
-}
-$summonerPuuid = $summonerInfo['puuid'];
-
-try {
-	if(isset($gameNumber)){
-		$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,null,null,0,$gameNumber);
-	}elseif (isset($matchIod)) {
-		$lastMatchsID = array($matchIod);
+$summonerName = $_GET['summonerName'];
+$server = $_GET['server'];
+if(isset($_GET['nbGames'])){
+	$gameNumber = intval($_GET['nbGames']);
+	if($gameNumber > 20){
+		$gameNumber = 1;
 	}
-} catch (Exception $e) {
-	return(array("matchByPuuid",$e->getMessage()));
+}elseif(isset($_GET['matchId'])){
+	$matchId = $_GET['matchId'];
+}else{
+	throw new Exception("missingArgument", 0);	
+}
+//obtention de la région correspondant au serveur
+$region = ModelRiotApi::getRegionByServer($server);
+//obtention des données de l'invocateur
+$summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
+$summonerPuuid = $summonerInfo['puuid'];
+if(isset($gameNumber)){
+	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,null,null,0,$gameNumber);
+}elseif (isset($matchIod)) {
+	$lastMatchsID = array($matchIod);
 }
 $matchAnalysedNumber = count($lastMatchsID);
 //array for all matchs
@@ -30,11 +28,7 @@ $result;
 //get Data for $summonerName for each match
 for($nbG=0; $nbG < $matchAnalysedNumber; $nbG++) {
 	//getMatchData
-	try {
-		$matchData = ModelRiotApi::getMatchData($lastMatchsID[$nbG],$region);
-	} catch (Exception $e) {
-		return(array("matchData",$e->getMessage()));
-	}
+	$matchData = ModelRiotApi::getMatchData($lastMatchsID[$nbG],$region);
 	//get summoner index
 	$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
 	//get alls datas for current summoner on an array

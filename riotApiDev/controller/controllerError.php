@@ -23,7 +23,7 @@
 			}
 			return $view;
 		}
-		public static function summonerInfoBySummonerName($errorCode){
+		public static function getSummonerInfoBySummonerName($errorCode){
 			if ($errorCode == '404') {
 				$view = 'summonerNameNotExist';
 			}elseif($errorCode == '429'){
@@ -85,6 +85,9 @@
 			return 'errorOccured';
 		}
 		public static function itemsAsset($errorCode){
+			return 'errorOccured';
+		}
+		public static function missingArgument($errorCode){
 			return 'errorOccured';
 		}
 	}

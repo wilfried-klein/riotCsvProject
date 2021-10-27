@@ -15,27 +15,18 @@ if(isset($_GET['action'])){
 Routeur::$action();
 class Routeur{
 	public static function profile() {
-		if(isset($_GET['summonerName'])){
-			$summonerName = $_GET['summonerName'];
-		}elseif (isset($_GET['summonerPuuid'])) {
-			$summonerPuuid = $_GET['summonerPuuid'];
-		}else{
-			$controller='error';
-			$view = 'errorOccured';
-			$pagetitle = "une erreur est survenue";
-			require(File::build_path(array("view","view.php")));
-		}
-		$server = $_GET['server'];
-		$test = require File::build_path(array("controller","controllerProfile.php"));
-		if(gettype($test) == "boolean"){
+		try {
+			require File::build_path(array("controller","controllerProfile.php"));
 			$controller='profile';
 			$view='profile';
 			$headerProfile='headerProfile';
 			$pagetitle = $summonerName . " - League Data Analysis";
 			require(File::build_path(array("view","view.php")));
-		}else{
+		} catch (Exception $e) {
 			$controller='error';
-			$view = ControllerError::$test[0]($test[1]);
+			$function = $e->getMessage();
+			$errorCode =$e->getCode();
+			$view = ControllerError::$function($errorCode);
 			$pagetitle = "une erreur est survenue";
 			require(File::build_path(array("view","view.php")));
 		}
@@ -47,24 +38,14 @@ class Routeur{
 		require(File::build_path(array("view","view.php")));
 	}
 	public static function getCsv(){
-		$summonerName = $_GET['summonerName'];
-		$server = $_GET['server'];
-		if(isset($_GET['nbGames'])){
-			$gameNumber = intval($_GET['nbGames']);
-			if($gameNumber > 20){
-				$gameNumber = 1;
-			}
-		}elseif(isset($_GET['matchId'])){
-			$matchId = $_GET['matchId'];
-		}else{
-
-		}
-		$test = require File::build_path(array("controller","controllerCsv.php"));
-		if(!$test){
+		try {
+			require File::build_path(array("controller","controllerCsv.php"));
 			require(File::build_path(array("view","csv","giveCsv.php")));
-		}else{
+		} catch (Exception $e) {
 			$controller='error';
-			$view = ControllerError::$test[0]($test[1]);
+			$function = $e->getMessage();
+			$errorCode =$e->getCode();
+			$view = ControllerError::$function($errorCode);
 			$pagetitle = "une erreur est survenue";
 			require(File::build_path(array("view","view.php")));
 		}
