@@ -437,9 +437,17 @@ main{
     color: whitesmoke;
 }
 
-.equipeDiv{
+.info5 .equipeDiv{
     display: flex;
     align-items: center;
+}
+
+.info5 .summonerName{
+    max-width: 99px; /* MODIF TAILLE ICI POUR VOIR TAILLE EN FONCTION DE LONGUEUR PSEUDO MAX */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
 }
 
 .info5 a:hover{

@@ -58,7 +58,7 @@
             <?php
             for ($g=0; $g < 5; $g++) {
                 echo '<a href="index.php?action=profile&server=euw1&summonerName=' . $value['summonerNameList'][$g] . '"><div class="equipeDiv">';
-                echo $value['summonerNameList'][$g] . '<img src="'. $value['summonerIconList'][$g].'" alt="icone du summoner">';
+                echo '<p class="summonerName">' . $value['summonerNameList'][$g] . '</p>' . '<img src="'. $value['summonerIconList'][$g].'" alt="icone du summoner">';
                 echo "</div></a>";
             }
             ?>
@@ -67,7 +67,7 @@
             <?php
             for ($g=0; $g < 5; $g++) {
                 echo '<a href="index.php?action=profile&server=euw1&summonerName=' . $value['summonerNameList'][$g+5] . '"><div class="equipeDiv">';
-                echo '<img src="'. $value['summonerIconList'][$g+5] .'" alt="icone du summoner">' . $value['summonerNameList'][$g+5];
+                echo '<img src="'. $value['summonerIconList'][$g+5] .'" alt="icone du summoner">' . '<p class="summonerName">' . $value['summonerNameList'][$g+5] . '</p>' ;
                 echo "</div></a>";
             }
             ?>
