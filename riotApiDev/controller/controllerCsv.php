@@ -1,58 +1,50 @@
 <?php
-$language = 'fr_FR';
-$summonerName = $_GET['summonerName'];
-$server = $_GET['server'];
-if(isset($_GET['nbGames'])){
-	$gameNumber = intval($_GET['nbGames']);
-	if($gameNumber > 20){
-		$gameNumber = 1;
+class ControllerCsv{
+	public static function getMultipleMatch($summonerPuuid,$region,$queue,$gameNumber){
+	//get match list
+		$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,$queue,null,0,$gameNumber);
+		$matchAnalysedNumber = count($lastMatchsID);
+		$result = array();
+		for ($i=0; $i < $matchAnalysedNumber; $i++) { 
+			$result[] = ControllerCsv::getOneMatch($lastMatchsID[$i],$summonerPuuid,$region);
+		}
+		return $result;
 	}
-}elseif(isset($_GET['matchId'])){
-	$matchId = $_GET['matchId'];
-}else{
-	throw new Exception("missingArgument", 0);	
-}
-//obtention de la région correspondant au serveur
-$region = ModelRiotApi::getRegionByServer($server);
-//obtention des données de l'invocateur
-$summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
-$summonerPuuid = $summonerInfo['puuid'];
-if(isset($gameNumber)){
-	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,null,null,0,$gameNumber);
-}elseif (isset($matchIod)) {
-	$lastMatchsID = array($matchIod);
-}
-$matchAnalysedNumber = count($lastMatchsID);
-//array for all matchs
-$result;
-//get Data for $summonerName for each match
-for($nbG=0; $nbG < $matchAnalysedNumber; $nbG++) {
+
+	public static function getOneMatch($matchID,$summonerPuuid,$region){
 	//getMatchData
-	$matchData = ModelRiotApi::getMatchData($lastMatchsID[$nbG],$region);
+		$matchData = ModelRiotApi::getMatchData($matchID,$region);
 	//get summoner index
-	$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
+		$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
 	//get alls datas for current summoner on an array
-	$result[$nbG] = $matchData['info']['participants'][$currentSummonerIndex];
-	$runeDataOfCurrentSummoner = $result[$nbG]['perks'];
-	unset($result[$nbG]['perks']);
+		$return = $matchData['info']['participants'][$currentSummonerIndex];
+		$runeDataOfCurrentSummoner = $return['perks'];
+		unset($return['perks']);
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
-	$result[$nbG]['matchId'] = $lastMatchsID[$nbG];
-	$result[$nbG]['gameStartTimestamp'] = $matchData['info']['gameCreation'];
-	if(array_key_exists('gameEndTimestamp', $matchData['info'])){
-		$result[$nbG]['gameDuration'] = $matchData['info']['gameDuration'];
-		$result[$nbG]['gameEndTimestamp'] = $matchData['info']['gameEndTimestamp'];
-	}else{
-		$result[$nbG]['gameDuration'] = $matchData['info']['gameDuration']/1000;
-		$result[$nbG]['gameEndTimestamp'] = -1;
+		$return['matchId'] = $matchID;
+		$return['gameStartTimestamp'] = $matchData['info']['gameCreation'];
+		if(array_key_exists('gameEndTimestamp', $matchData['info'])){
+			$return['gameDuration'] = $matchData['info']['gameDuration'];
+			$return['gameEndTimestamp'] = $matchData['info']['gameEndTimestamp'];
+		}else{
+			$return['gameDuration'] = $matchData['info']['gameDuration']/1000;
+			$return['gameEndTimestamp'] = -1;
+		}
+		return $return;
+	}
+
+	public static function arrayToCsvStream($array){
+		$csvContent = "";
+	//ajout nom colonne
+		foreach ($array[0] as $key => $value) {
+			$csvContent = $csvContent . $key . ",";
+		}
+		$csvContent .= "\n";
+	//remplissage ligne
+		foreach ($array as $matchData) {
+			$csvContent = $csvContent .  implode(",", $matchData) . "\n";
+		}
+		return $csvContent;
 	}
 }
-//conversion vers CSV
-$csvContent = "";
-foreach ($result[0] as $key => $value) {
-	$csvContent = $csvContent . $key . ",";
-}
-foreach ($result as $matchData) {
-	$csvContent = $csvContent .  implode(",", $matchData) . "\n";
-}
-return false;
 ?>

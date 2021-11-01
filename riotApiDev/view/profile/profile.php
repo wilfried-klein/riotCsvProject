@@ -58,17 +58,21 @@
                 <h2>Exporte tes données en CSV ici:</h2>
                 <form id='formCsv' name='formCsv' method="get" action="index.php" >
                     <fieldset>
-                        <label for="game_number">Combien de parties ? </label>
-                        <select name="nbGames" id="game_number">
+                        <select name="gameNumber" id="game_number">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <!--<option value="50">50</option>-->
                             <!--<option value="100">100</option>-->
                         </select required>
+                        <select name="queue" id="game_number">
+                            <option value="400">Normal Draft</option>
+                            <option value="450">ARAM</option>
+                            <option value="420">SoloQ</option>
+                        </select required>
                     </fieldset>
                     <input type="hidden" name="action" value="getCsv">
-                    <input type="hidden" name="summonerName" value="<?php echo $summonerName ?>">
-                    <input type="hidden" name="server" value="<?php echo $server ?>">
+                    <input type="hidden" name="summonerPuuid" value="<?php echo $summonerPuuid ?>">
+                    <input type="hidden" name="region" value="europe">
                     <input class="downloaderCsvImage" type="image" name="submit" src="img/telecharger.png" alt="img bouton telecharger" />
                 </form>
             </div>

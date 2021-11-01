@@ -15,6 +15,7 @@ if(isset($_GET['summonerName'])){
     throw new Exception("missingArgument",0);
     
 }
+$summonerPuuid = $summonerInfo['puuid'];
 $summonerLevel = $summonerInfo['summonerLevel'];
 $summonerIcon = ModelRiotApi::getProfileIconAsset($currentVersion,$summonerInfo['profileIconId']);
 $rankingData = ModelRiotApi::getLeagueDatabySummonerId($summonerInfo['id'], $server);

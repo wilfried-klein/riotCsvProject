@@ -77,10 +77,10 @@
     <td class="info6">
         <form id='formCsv1' name='formCsv1' method="get" action="index.php" >
             <div class="style7">
-                <input type="hidden" name="action" value="getCsv">
+                <input type="hidden" name="action" value="getOneCsv">
                 <input type="hidden" name="matchId" value="<?php echo $value['matchId'] ?>">
-                <input type="hidden" name="summonerName" value="<?php echo $summonerName ?>">
-                <input type="hidden" name="server" value="<?php echo $server ?>">
+                <input type="hidden" name="summonerPuuid" value="<?php echo $summonerPuuid ?>">
+                <input type="hidden" name="region" value="<?php echo $region ?>">
                 <input class="downloaderCsvImage" type="image" name="submit" src="img/telecharger.png" alt="img bouton telecharger" />
             </div>
         </form>
