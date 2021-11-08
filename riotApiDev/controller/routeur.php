@@ -1,6 +1,7 @@
 <?php
 require_once (__DIR__ . '/../lib/File.php'); // chemin relatif pour tous
 require_once File::build_path(array("model","modelRiotApi.php"));
+require_once File::build_path(array("util","util.php"));
 require_once File::build_path(array("controller","controllerError.php"));
 require_once File::build_path(array("controller","controllerCsv.php"));
 //definition et vérification de la fonction
