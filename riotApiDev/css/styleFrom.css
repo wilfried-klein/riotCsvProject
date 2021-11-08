@@ -44,6 +44,7 @@ header #bordureLogo{
 }
 
 main{
+    width: 100%;
     flex: 1; /* ? */
     display: flex;
     flex-direction: column;
@@ -63,11 +64,18 @@ form{
 }
 
 fieldset{
+    width: 100%;
     border: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 fieldset label{
     font-size: 25px;
+    text-align: center;
+    margin-right: 3px;
 }
 
 fieldset #summonerName_id{
@@ -96,6 +104,7 @@ select{
     text-align: center;
     height: 34px;
     padding: 4px;
+    margin-top: 3px;
     border: none;
     border-radius: 4px;
     background-color: #f1f1f1;
