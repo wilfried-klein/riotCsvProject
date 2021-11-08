@@ -1,93 +1,58 @@
 <?php
+$language = 'fr_FR';
 $summonerName = $_GET['summonerName'];
 $server = $_GET['server'];
-$gameNumber = $_GET['nbGames'];
-$language = 'fr_FR';
-
+if(isset($_GET['nbGames'])){
+	$gameNumber = intval($_GET['nbGames']);
+	if($gameNumber > 20){
+		$gameNumber = 1;
+	}
+}elseif(isset($_GET['matchId'])){
+	$matchId = $_GET['matchId'];
+}else{
+	throw new Exception("missingArgument", 0);	
+}
 //obtention de la région correspondant au serveur
-try {
-	$region = ModelRiotApi::getRegionByServer($server);
-} catch (Exception $e) {
-	die($e->getMessage());
-}
+$region = ModelRiotApi::getRegionByServer($server);
 //obtention des données de l'invocateur
-try {
-	$summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
-} catch (Exception $e) {
-	$errorCode = $e->getMessage();
-	if ($errorCode == "403") {
-		die("Cette invocateur n'existe pas");
-	}
-	if ($errorCode == "429") {
-		die("Trop de demande,veuiller reéssayer");
-	}
-	if($errorCode == "503"){
-		die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-	}
-}
+$summonerInfo = ModelRiotApi::getSummonerInfoBySummonerName(rawurlencode($summonerName),$server);
 $summonerPuuid = $summonerInfo['puuid'];
-
-try {
+if(isset($gameNumber)){
 	$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,null,null,0,$gameNumber);
-} catch (Exception $e) {
-	$errorCode = $e->getMessage();
-	if ($errorCode == "403") {
-		die("Cette invocateur n'existe pas");
-	}
-	if ($errorCode == "429") {
-		die("Trop de demande,veuiller reéssayer");
-	}
-	if($errorCode == "503"){
-		die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-	}
+}elseif (isset($matchIod)) {
+	$lastMatchsID = array($matchIod);
 }
+$matchAnalysedNumber = count($lastMatchsID);
 //array for all matchs
-$allMatchData = array();
+$result;
 //get Data for $summonerName for each match
-foreach ($lastMatchsID as $matchID) {
+for($nbG=0; $nbG < $matchAnalysedNumber; $nbG++) {
 	//getMatchData
-	try {
-		$matchData = ModelRiotApi::getMatchData($matchID,$region);
-	} catch (Exception $e) {
-		$errorCode = $e->getMessage();
-		if ($errorCode == "403") {
-			die("Le match demandé n'existe pas");
-		}
-		if ($errorCode == "429") {
-			die("Trop de demande,veuiller reéssayer");
-		}
-		if($errorCode == "503"){
-			die("le service est temporairement indisponible, veuiller reéssayer plus tard");
-		}
-	}
+	$matchData = ModelRiotApi::getMatchData($lastMatchsID[$nbG],$region);
 	//get summoner index
 	$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
 	//get alls datas for current summoner on an array
-	$dataOfCurrentSummoner = $matchData['info']['participants'][$currentSummonerIndex];
-	$runeDataOfCurrentSummoner = $dataOfCurrentSummoner['perks'];
-	unset($dataOfCurrentSummoner['perks']);
+	$result[$nbG] = $matchData['info']['participants'][$currentSummonerIndex];
+	$runeDataOfCurrentSummoner = $result[$nbG]['perks'];
+	unset($result[$nbG]['perks']);
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
-	$dataOfCurrentSummoner['matchId'] = $matchID;
-	$dataOfCurrentSummoner['gameStartTimestamp'] = $matchData['info']['gameCreation'];
+	$result[$nbG]['matchId'] = $lastMatchsID[$nbG];
+	$result[$nbG]['gameStartTimestamp'] = $matchData['info']['gameCreation'];
 	if(array_key_exists('gameEndTimestamp', $matchData['info'])){
-		$dataOfCurrentSummoner['gameDuration'] = $matchData['info']['gameDuration'];
-		$dataOfCurrentSummoner['gameEndTimestamp'] = $matchData['info']['gameEndTimestamp'];
+		$result[$nbG]['gameDuration'] = $matchData['info']['gameDuration'];
+		$result[$nbG]['gameEndTimestamp'] = $matchData['info']['gameEndTimestamp'];
 	}else{
-		$dataOfCurrentSummoner['gameDuration'] = $matchData['info']['gameDuration']/1000;
-		$dataOfCurrentSummoner['gameEndTimestamp'] = -1;
+		$result[$nbG]['gameDuration'] = $matchData['info']['gameDuration']/1000;
+		$result[$nbG]['gameEndTimestamp'] = -1;
 	}
-	$allMatchData[] = $dataOfCurrentSummoner;
 }
 //conversion vers CSV
 $csvContent = "";
-foreach ($allMatchData as $matchData) {
-	foreach ($matchData as $key => $value) {
-		$csvContent = $csvContent . $key . ",";
-	}
-	$csvContent = $csvContent . "\n";
+foreach ($result[0] as $key => $value) {
+	$csvContent = $csvContent . $key . ",";
+}
+foreach ($result as $matchData) {
 	$csvContent = $csvContent .  implode(",", $matchData) . "\n";
 }
-header('Content-Type: text/csv Content-Disposition: attachment; filename="test.csv"');
-header('Content-Disposition: attachment; filename="gameData.csv"');
-echo $csvContent;
+return false;
 ?>

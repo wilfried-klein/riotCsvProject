@@ -1,28 +1,35 @@
 <?php
 require_once (__DIR__ . '/../lib/File.php'); // chemin relatif pour tous
-//require_once ('C:\MAMP\htdocs\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
-//require_once ('/home/ann2/kleinw/public_html/projet-s3-outil-analyse-des-donnees-de-league-of-legends/riotApiDev/lib/File.php');
-//require_once ('C:\\Users\Wilfried\projet-s3-outil-analyse-des-donnees-de-league-of-legends\riotApiDev\lib\File.php');
-//require_once ('/home/ann2/francoisw/public_html/projetLol/riotApiDev/lib/File.php');
 require_once File::build_path(array("model","modelRiotApi.php"));
+require_once File::build_path(array("controller","controllerError.php"));
+//definition et vérification de la fonction
+//formualaire sera celle par défaut
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
+	if(array_search($action,get_class_methods('Routeur')) === false){
+		$action = 'formulaire';
+	}
 }else{
 	$action = 'formulaire';
 }
-
 Routeur::$action();
 class Routeur{
-	// On recupère l'action passée dans l'URL
 	public static function profile() {
-		$summonerName = $_GET['summonerName'];
-		$server = $_GET['server'];
-		require File::build_path(array("controller","controllerProfile.php"));
-		$controller='profile';
-		$view='profile';
-		$headerProfile='headerProfile';
-		$pagetitle = $summonerName . " - League Data Analysis";
-		require(File::build_path(array("view","view.php")));
+		try {
+			require File::build_path(array("controller","controllerProfile.php"));
+			$controller='profile';
+			$view='profile';
+			$headerProfile='headerProfile';
+			$pagetitle = $summonerName . " - League Data Analysis";
+			require(File::build_path(array("view","view.php")));
+		} catch (Exception $e) {
+			$controller='error';
+			$function = $e->getMessage();
+			$errorCode =$e->getCode();
+			$view = ControllerError::$function($errorCode);
+			$pagetitle = "une erreur est survenue";
+			require(File::build_path(array("view","view.php")));
+		}
 	}
 	public static function formulaire(){
 		$controller='formulaire';
@@ -31,10 +38,17 @@ class Routeur{
 		require(File::build_path(array("view","view.php")));
 	}
 	public static function getCsv(){
-		$summonerName = $_GET['summonerName'];
-		$server = $_GET['server'];
-		$gameNumber = $_GET['nbGames'];
-		require (File::build_path(array("controller","controllerCsv.php")));
+		try {
+			require File::build_path(array("controller","controllerCsv.php"));
+			require(File::build_path(array("view","csv","giveCsv.php")));
+		} catch (Exception $e) {
+			$controller='error';
+			$function = $e->getMessage();
+			$errorCode =$e->getCode();
+			$view = ControllerError::$function($errorCode);
+			$pagetitle = "une erreur est survenue";
+			require(File::build_path(array("view","view.php")));
+		}
 	}
 }
 
