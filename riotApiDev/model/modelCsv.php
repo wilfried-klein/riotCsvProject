@@ -1,11 +1,14 @@
 <?php
+
+
 class ControllerCsv{
-	public static function getMultipleMatch($summonerPuuid,$region,$queue,$gameNumber){
+	public static function getMultipleMatch($summonerPuuid,$region,$queue==null){
+	//get match list
 		$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,$queue,null,0,$gameNumber);
 		$matchAnalysedNumber = count($lastMatchsID);
 		$result = array();
 		for ($i=0; $i < $matchAnalysedNumber; $i++) { 
-			$result[] = ControllerCsv::getOneMatch($lastMatchsID[$i],$summonerPuuid,$region);
+			$result[] = getOneMatch($lastMatchsID[$i],$summonerPuuid,$region);
 		}
 		return $result;
 	}
@@ -14,15 +17,13 @@ class ControllerCsv{
 	//getMatchData
 		$matchData = ModelRiotApi::getMatchData($matchID,$region);
 	//get summoner index
-		$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants'])
+		$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
 	//get alls datas for current summoner on an array
 		$return = $matchData['info']['participants'][$currentSummonerIndex];
 		$runeDataOfCurrentSummoner = $return['perks'];
-	//suppression des infos non voulue
-		$targets = array('participantId','profileIcon','puuid','riotIdName','riotIdTagline','summonerId','perks');
-		$return = Util::deleteInArray($return,$targets);
+		unset($return['perks']);
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
-		$return['matchId'] = $matchID;
+		$return['matchId'] = $lastMatchsID[$nbG];
 		$return['gameStartTimestamp'] = $matchData['info']['gameCreation'];
 		if(array_key_exists('gameEndTimestamp', $matchData['info'])){
 			$return['gameDuration'] = $matchData['info']['gameDuration'];
@@ -40,7 +41,6 @@ class ControllerCsv{
 		foreach ($array[0] as $key => $value) {
 			$csvContent = $csvContent . $key . ",";
 		}
-		$csvContent .= "\n";
 	//remplissage ligne
 		foreach ($array as $matchData) {
 			$csvContent = $csvContent .  implode(",", $matchData) . "\n";

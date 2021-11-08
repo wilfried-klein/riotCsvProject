@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 //supprimer pour afficher les erreurs
-error_reporting(0);
+//error_reporting(0);
 //04/10/2021
 //ajout du getter pour données des runes
 //images des runes
@@ -49,17 +49,14 @@ class ModelRiotApi{
     //for matchv5/bypuid
     $type = {ranked,normal,tourney,tutorial}
     */
-    private static function doHttpRequest($url){
+    public static function doHttpRequest($url){
         $content = file_get_contents($url);
-        if(!$content){
-            return 404;
+        //get http response code
+        $http_response_code = substr($http_response_header[0],9,3);
+        if($http_response_code  != "200"){
+            return intval($http_response_code);
         }else{
-            $response_code = substr($http_response_header[0],9,-3);
-            if($response_code != '200'){
-                return intval(get_headers($url)[0],9,3);
-            }else{
-                return $content;
-            }
+            return $content;
         }
     }
     //CHAMPION-V3
