@@ -14,7 +14,7 @@ class ControllerCsv{
 	//getMatchData
 		$matchData = ModelRiotApi::getMatchData($matchID,$region);
 	//get summoner index
-		$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants'])
+		$currentSummonerIndex = array_search($summonerPuuid, $matchData['metadata']['participants']);
 	//get alls datas for current summoner on an array
 		$return = $matchData['info']['participants'][$currentSummonerIndex];
 		$runeDataOfCurrentSummoner = $return['perks'];

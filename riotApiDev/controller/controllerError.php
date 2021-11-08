@@ -10,10 +10,10 @@
 
 	*/
 	class ControllerError{
-		public static function regionByServer($errorCode){
+		public static function getRegionByServer($errorCode){
 			return "serverNotExist";
 		}
-		public static function versionData($errorCode){
+		public static function getVersionData($errorCode){
 			if($errorCode == '404'){
 				$view = 'serviceUnavailable';
 			}elseif ($errorCode == '403') {
@@ -33,10 +33,10 @@
 			}
 			return $view;
 		}
-		public static function profileIconAsset($errorCode){
+		public static function getProfileIconAsset($errorCode){
 			return 'errorOccured';
 		}
-		public static function leagueDatabySummonerId($errorCode){
+		public static function getLeagueDatabySummonerId($errorCode){
 			if($errorCode == '404'){
 				$view = 'serviceUnavailable';
 			}elseif($errorCode == '429'){
@@ -46,10 +46,10 @@
 			}
 			return $view;
 		}
-		public static function rankedEmblems($errorCode){
+		public static function getRankedEmblems($errorCode){
 			return 'errorOccured';
 		}
-		public static function matchByPuuid($errorCode){
+		public static function getMatchByPuuid($errorCode){
 			if($errorCode == '404'){
 				$view = 'serviceUnavailable';
 			}elseif($errorCode == '429'){
@@ -59,16 +59,16 @@
 			}
 			return $view;
 		}
-		public static function summonerSpellData($errorCode){
+		public static function getSummonerSpellData($errorCode){
 			return 'errorOccured';
 		}
-		public static function runesData($errorCode){
+		public static function getRunesData($errorCode){
 			return 'errorOccured';
 		}
-		public static function queusData($errorCode){
+		public static function getQueusData($errorCode){
 			return 'errorOccured';
 		}
-		public static function matchData($errorCode){
+		public static function getMatchData($errorCode){
 			if($errorCode == '404'){
 				$view = 'serviceUnavailable';
 			}elseif($errorCode == '429'){
@@ -78,16 +78,16 @@
 			}
 			return $view;
 		}
-		public static function championSquareAsset($errorCode){
+		public static function getChampionSquareAsset($errorCode){
 			return 'errorOccured';
 		}
-		public static function runeAsset($errorCode){
+		public static function getRuneAsset($errorCode){
 			return 'errorOccured';
 		}
-		public static function itemsAsset($errorCode){
+		public static function getItemsAsset($errorCode){
 			return 'errorOccured';
 		}
-		public static function missingArgument($errorCode){
+		public static function getMissingArgument($errorCode){
 			return 'errorOccured';
 		}
 	}

@@ -540,7 +540,7 @@ class ModelRiotApi{
         if(array_key_exists($server,ModelRiotApi::$ServerRegionEquivalence)){
             return ModelRiotApi::$ServerRegionEquivalence[$server];
         }else{
-            throw new Exception("ServerNotExist");
+            throw new Exception(__FUNCTION__, 456);
         }
 
     }

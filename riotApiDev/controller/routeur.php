@@ -34,7 +34,6 @@ class Routeur{
 		}
 	}
 	public static function formulaire(){
-		echo "test";
 		$controller='formulaire';
 		$view='formulaire';
 		$pagetitle = 'Accueil - League Data Analysis';
