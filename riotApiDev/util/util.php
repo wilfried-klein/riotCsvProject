@@ -2,8 +2,8 @@
 	class Util{
 
 		public static function deleteInArray($array,$targets){
-			foreach ($target as $value) {
-				unset($array[$target]);
+            foreach ($targets as $value ) {
+				unset($array[$value]);
 			}
 			return $array;
 		}
