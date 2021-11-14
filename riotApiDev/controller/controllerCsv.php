@@ -31,6 +31,8 @@ class ControllerCsv{
         //suppression des infos non voulue
         $targets = array('participantId','profileIcon','puuid','riotIdName','riotIdTagline','summonerId','perks','championId','teamId','matchId','gameStartTimestamp','gameEndTimestamp');
         $return = Util::deleteInArray($return,$targets);
+        //conversion des booléens
+        $return = Util::convertBoolean($return);
 		return $return;
 	}
 
