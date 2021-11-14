@@ -18,9 +18,6 @@ class ControllerCsv{
 	//get alls datas for current summoner on an array
 		$return = $matchData['info']['participants'][$currentSummonerIndex];
 		$runeDataOfCurrentSummoner = $return['perks'];
-	//suppression des infos non voulue
-		$targets = array('participantId','profileIcon','puuid','riotIdName','riotIdTagline','summonerId','perks');
-		$return = Util::deleteInArray($return,$targets);
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
 		$return['matchId'] = $matchID;
 		$return['gameStartTimestamp'] = $matchData['info']['gameCreation'];
@@ -31,6 +28,9 @@ class ControllerCsv{
 			$return['gameDuration'] = $matchData['info']['gameDuration']/1000;
 			$return['gameEndTimestamp'] = -1;
 		}
+        //suppression des infos non voulue
+        $targets = array('participantId','profileIcon','puuid','riotIdName','riotIdTagline','summonerId','perks','championId','teamId','matchId','gameStartTimestamp','gameEndTimestamp');
+        $return = Util::deleteInArray($return,$targets);
 		return $return;
 	}
 
