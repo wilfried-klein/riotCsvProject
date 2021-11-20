@@ -1,5 +1,16 @@
 <?php
 class ControllerCsv{
+	
+	//$list of column name of css
+	private static $list = null;
+
+	public static function getList(){
+		if(ControllerCsv::$list == null){
+			ControllerCsv::$list = json_decode(file_get_contents('list.json'),true);
+		}
+		return ControllerCsv::$list;
+	}
+
 	public static function getMultipleMatch($summonerPuuid,$region,$queue,$gameNumber){
 		$lastMatchsID = ModelRiotApi::getMatchByPuuid($summonerPuuid,$region,null,null,$queue,null,0,$gameNumber);
 		$matchAnalysedNumber = count($lastMatchsID);
@@ -28,22 +39,23 @@ class ControllerCsv{
 			$return['gameDuration'] = $matchData['info']['gameDuration']/1000;
 			$return['gameEndTimestamp'] = -1;
 		}
-        //suppression des infos non voulue
-        $targets = array('participantId','profileIcon','puuid','riotIdName','riotIdTagline','summonerId','perks','championId','teamId','matchId','gameStartTimestamp','gameEndTimestamp');
-        $return = Util::deleteInArray($return,$targets);
+        //filtrage des données du match
+		$return = Util::arrayFilter($return,array_keys(ControllerCsv::getList()));
         //conversion des booléens
-        $return = Util::convertBoolean($return);
+		$return = Util::convertBoolean($return);
 		return $return;
 	}
 
 	public static function arrayToCsvStream($array){
 		$csvContent = "";
-	//ajout nom colonne
+		//modification nom colonne
+		$array[0] = Util::multiChangeColumnName($array[0],ControllerCsv::getList());
+		//ajout nom colonne
 		foreach ($array[0] as $key => $value) {
 			$csvContent = $csvContent . $key . ",";
 		}
 		$csvContent .= "\n";
-	//remplissage ligne
+		//remplissage ligne
 		foreach ($array as $matchData) {
 			$csvContent = $csvContent .  implode(",", $matchData) . "\n";
 		}

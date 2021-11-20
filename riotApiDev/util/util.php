@@ -1,6 +1,15 @@
 <?php
 class Util{
 
+	//filter is a array with keey u want in returned array
+	//key in filter need to be in $array
+	public static function arrayFilter($array, $filter){
+		$return = array();
+		foreach ($filter as $key) {
+			$return[$key] = $array[$key];
+		}
+		return $return;
+	}
 	public static function deleteInArray($array,$targets){
 		foreach ($targets as $value) {
 			unset($array[$value]);
@@ -21,7 +30,7 @@ class Util{
 									);*/
 	public static function multiChangeColumnName($array,$list){
 		foreach ($list as $oldName => $newName) {
-			$array = changeColumnName($array,$oldName,$newName);
+			$array = Util::changeColumnName($array,$oldName,$newName);
 		}
 		return $array;
 	}

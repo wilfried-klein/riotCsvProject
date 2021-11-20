@@ -33,7 +33,6 @@ class ModelRiotApi{
         'tr1'  => 'europe',
         'ru'   => 'europe',
     );
-
     //PARTIE 'CONF' EN MODÈLE MVC
 
     //RIOT API
