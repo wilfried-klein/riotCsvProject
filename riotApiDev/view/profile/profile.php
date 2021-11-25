@@ -68,6 +68,7 @@
                             <option value="400">Normal Draft</option>
                             <option value="450">ARAM</option>
                             <option value="420">SoloQ</option>
+                            <option value="440">Flex Q</option>
                         </select required>
                     </fieldset>
                     <input type="hidden" name="action" value="getCsv">
