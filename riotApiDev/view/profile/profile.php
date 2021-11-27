@@ -65,10 +65,10 @@
                             <!--<option value="100">100</option>-->
                         </select required>
                         <select name="queue" id="game_number">
+                            <option value="420">SoloQ</option>
+                            <option value="440">FlexQ</option>
                             <option value="400">Normal Draft</option>
                             <option value="450">ARAM</option>
-                            <option value="420">SoloQ</option>
-                            <option value="440">Flex Q</option>
                         </select required>
                     </fieldset>
                     <input type="hidden" name="action" value="getCsv">
