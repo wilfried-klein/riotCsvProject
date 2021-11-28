@@ -51,6 +51,7 @@ class Routeur{
 			}
 			$matchData = ControllerCsv::getMultipleMatch($summonerPuuid,$region,$queue,$gameNumber);
 			$csvContent = ControllerCsv::arrayToCsvStream($matchData);
+			require_once File::build_path(array("mail","mailer.php"));
 			require(File::build_path(array("view","csv","giveCsv.php")));
 		} catch (Exception $e) {
 			$controller='error';
@@ -73,6 +74,7 @@ class Routeur{
 			$matchData = ControllerCsv::getOneMatch($matchID,$summonerPuuid,$region);
 			$array = array($matchData);
 			$csvContent = ControllerCsv::arrayToCsvStream($array);
+			require File::build_path(array("mail","mailer.php"));
 			require(File::build_path(array("view","csv","giveCsv.php")));
 		} catch (Exception $e) {
 			$controller='error';

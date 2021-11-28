@@ -29,6 +29,10 @@ class ControllerCsv{
 	//get alls datas for current summoner on an array
 		$return = $matchData['info']['participants'][$currentSummonerIndex];
 		$runeDataOfCurrentSummoner = $return['perks'];
+	//itemId => itemName
+		for ($i=0; $i < 7; $i++) { 
+			$return["item$i"] = Util::getObjectName($return["item$i"]);
+		}
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
 		$return['matchId'] = $matchID;
 		$return['gameStartTimestamp'] = $matchData['info']['gameCreation'];

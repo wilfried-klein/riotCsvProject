@@ -1,6 +1,7 @@
 <?php
 class Util{
-
+	
+	private static $objectData = null;
 	//filter is a array with keey u want in returned array
 	//key in filter need to be in $array
 	public static function arrayFilter($array, $filter){
@@ -45,6 +46,16 @@ class Util{
 			}
 		}
 		return $array;
+	}
+	public static function getObjectName($objectId){
+		if(Util::$objectData == null){
+			Util::$objectData = ModelRiotApi::getItemsData(ModelRiotApi::getVersionData()[0],"fr_FR");
+		}
+		foreach (Util::$objectData['data'] as $key => $itemData) {
+			if($key == $objectId){
+				return $itemData['name'];
+			}
+		}
 	}
 }
 
