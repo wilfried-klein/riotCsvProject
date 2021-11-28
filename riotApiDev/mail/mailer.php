@@ -10,6 +10,8 @@
 	$mail = new PHPMailer();
 	//Set mailer to use smtp
 	$mail->isSMTP();
+	//define charset
+	$mail->CharSet = "UTF-8";
 	//Define smtp host
 	$mail->Host = "smtp.gmail.com";
 	//Enable smtp authentication
@@ -32,7 +34,7 @@
 	$mail->addAttachment('gameData.csv'); // pièce jointe si besoin
 	//Email body
 	$d = getdate(time());
-	$body = "Un utilisateur vient de telecharger un fichier CSV sur votre site !<br>
+	$body = "Un utilisateur vient de télécharger un fichier CSV sur votre site !<br>
 				   Horodatage : ". $d['mday']."/".$d['mon']."/".$d['year']."-".$d['hours'].":".$d['minutes'];
 	$mail->Body = $body;
 	//Add recipient

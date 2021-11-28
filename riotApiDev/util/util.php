@@ -2,6 +2,8 @@
 class Util{
 	
 	private static $objectData = null;
+	private static $summonerSpellData = null;
+	private static $runeData = null;
 	//filter is a array with keey u want in returned array
 	//key in filter need to be in $array
 	public static function arrayFilter($array, $filter){
@@ -54,6 +56,16 @@ class Util{
 		foreach (Util::$objectData['data'] as $key => $itemData) {
 			if($key == $objectId){
 				return $itemData['name'];
+			}
+		}
+	}
+	public static function getSummonerSpellName($summonerSpellId){
+		if(Util::$summonerSpellData == null){
+			Util::$summonerSpellData = ModelRiotApi::getSummonerSpellsData(ModelRiotApi::getVersionData()[0],"fr_FR");
+		}
+		foreach (Util::$summonerSpellData['data'] as $value) {
+			if($value['key'] == $summonerSpellId){
+			return $value['name'];
 			}
 		}
 	}

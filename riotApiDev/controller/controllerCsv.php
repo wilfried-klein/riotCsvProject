@@ -33,6 +33,9 @@ class ControllerCsv{
 		for ($i=0; $i < 7; $i++) { 
 			$return["item$i"] = Util::getObjectName($return["item$i"]);
 		}
+	//summonerSpellId => summonerSpellName
+		$return["summoner1Id"] = Util::getSummonerSpellName($return["summoner1Id"]);
+		$return["summoner2Id"] = Util::getSummonerSpellName($return["summoner2Id"]);
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
 		$return['matchId'] = $matchID;
 		$return['gameStartTimestamp'] = $matchData['info']['gameCreation'];
