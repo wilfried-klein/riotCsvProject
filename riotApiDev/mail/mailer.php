@@ -8,6 +8,7 @@
 	file_put_contents("gameData.csv",$csvContent);
 	//Create instance of PHPMailer
 	$mail = new PHPMailer();
+    $mail->CharSet = "UTF-8";
 	//Set mailer to use smtp
 	$mail->isSMTP();
 	//Define smtp host
@@ -23,7 +24,7 @@
 	//Set gmail password
 	$mail->Password = "projetS3"; // mdp email
 	//Email subject
-	$mail->Subject = "Notification telechargement CSV";
+	$mail->Subject = "De nouvelles données ont été téléchargées !";
 	//Set sender email
 	$mail->setFrom("getstatlol.csv@gmail.com"); // inutile, je n'ai pas trouvé où ça apparaissait dans le mail
 	//Enable HTML
