@@ -76,9 +76,9 @@ $list = array(
     'spell2Casts' => 'Sort 2 lancé',
     'spell3Casts' => 'Sort 3 lancé',
     'spell4Casts' => 'Sort 4 lancé',
-    'summoner1Id' => 'Id sort d\'invocateur 1',
+    'summoner1Id' => 'Sort d\'invocateur 1',
     'summoner1Casts' => 'Sort d\'invocateur 1 lancé',
-    'summoner2Id' => 'Id sort d\'invocateur 2',
+    'summoner2Id' => 'Sort d\'invocateur 2',
     'summoner2Casts' => 'Sort d\'invocateur 2 lancé',
     /* OBJECTIFS */
     'turretKills' => 'Tourelles Détruits',

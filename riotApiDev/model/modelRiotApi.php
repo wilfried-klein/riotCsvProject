@@ -1,22 +1,11 @@
 <?php
 set_time_limit(0);
 //supprimer pour afficher les erreurs
-//error_reporting(0);
+error_reporting(0);
 //04/10/2021
-//ajout du getter pour données des runes
-//images des runes
-//images des emblèmes de rang
-//modification du getter getMatchbyPuuid,  supression de test et du syteme de gestion de l'url
-//suppresion de la fonction jsonGetter()
-//la fonction ne faisant qu'une seul ligne je l'ai mise dans chaque getter
 
 //The AMERICAS routing value serves NA, BR, LAN, LAS, and OCE. The ASIA routing value serves KR and JP. The EUROPE routing value serves EUNE, EUW, TR, and RU.
 
-//fonctionnement de matchV5/timeline :
-//a chaque minute de la partie le jeu crée un nouveau "participantFrames" plus un au début et un a la fin donc un total de (durée de la partie en minute + 2),
-//entre chaque participantFrames un tableau d'event est crée ou a chaque evenement (liste a definir) en jeu indique sont type, sont horodatage (en milliseconde) et les info le concernants
-//les métadonnées sont au début et indique la liste des participants
-//l'id correspondant au joueur sont a la fin.
 class ModelRiotApi{
     private static $api_key = "RGAPI-7f853f0c-a6fd-40f8-a500-8c9222541a88";
 
