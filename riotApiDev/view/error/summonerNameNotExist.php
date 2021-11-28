@@ -1,6 +1,6 @@
 
 <main>
 	<img src="img/summonerNotExist.jpg">
-	<p>Cette invocateur n'existe pas</p>
-	<a href="index.php?action=formulaire">Accueil</a>
+	<p>Cet invocateur n'existe pas</p>
+	<a class="retourAccueil" href="index.php?action=formulaire">Accueil</a>
 </main>

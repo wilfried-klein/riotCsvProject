@@ -99,6 +99,16 @@ header #bordureLogo {
 
 /* MAIN */
 
+.retourAccueil{
+    color: white;
+    font-size: 47px;
+    font-weight: bold;
+}
+
+.retourAccueil:hover{
+   color: #606060;
+}
+
 main{
     flex: 1; /* ? */
     display: flex;
