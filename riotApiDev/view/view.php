@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title><?php echo $pagetitle; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <?php
         if ($controller=='formulaire') {
             echo '<link rel="stylesheet" type="text/css" href="css/styleFrom.css">';

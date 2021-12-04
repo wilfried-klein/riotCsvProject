@@ -91,5 +91,29 @@
                 </div>
             </div>
         </div>
+        <div class="separateurBas"></div>
+        <h1 id="titre-graphs"> Graphiques :</h1>
+        <div class="graphs">
+            <div class="graphique1">
+                <canvas id="graph1"></canvas>
+                <script src="js/graph1.js"></script>
+            </div>
+            <div class="graphique2">
+                <canvas id="graph2"></canvas>
+                <script src="js/graph2.js"></script>
+            </div>
+            <div class="graphique3">
+                <canvas id="graph3"></canvas>
+                <script src="js/graph3.js"></script>
+            </div>
+            <div class="graphique4">
+                <canvas id="graph4"></canvas>
+                <script src="js/graph4.js"></script>
+            </div>
+            <div class="graphique5">
+                <canvas id="graph5"></canvas>
+                <script src="js/graph5.js"></script>
+            </div>
+        </div>
     </div>
 </main>
