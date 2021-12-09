@@ -1,4 +1,7 @@
 <?php
+foreach ($result as $key => $value) {
+    $kdapergame[]=($value['kills']+$value['assists'])/max(1,$value['deaths']);
+}
 $highest = number_format(max($kdapergame), 2);
 ?>
 <script>
