@@ -1,7 +1,22 @@
 <script>
-var randomScalingFactor = function() {
-    return Math.round(Math.random() * 100);
-};
+<?php
+    $ranked5v5 = 0;
+    $rankedSoloDuo = 0;
+    $normal = 0;
+    $aram = 0;
+    foreach ($result as $value) {
+
+        if ($value['matchType']=='Ranked Flex games'){
+            $ranked5v5 += 1;
+        }elseif ($value['matchType']=='5v5 Ranked Solo games'){
+            $rankedSoloDuo += 1;
+        }elseif ($value['matchType']=='5v5 Draft Pick games'){
+            $normal += 1;
+        }else{
+            $aram += 1;
+        }
+    }
+?>
 var chartColors = {
     red: 'rgb(255, 99, 132)',
     orange: 'rgb(255, 159, 64)',
@@ -17,38 +32,21 @@ var config = {
     type: 'radar',
     data: {
         labels: [
-            ["Eating", "Dinner"],
-            ["Drinking", "Water"], "Sleeping", ["Designing", "Graphics"], "Coding", "Cycling", "Running"
+            "ARAM", "Normal game", "Ranked Solo", "Ranked Flex"
         ],
         datasets: [{
-            label: "My First dataset",
-            backgroundColor: color(chartColors.red).alpha(0.2).rgbString(),
-            borderColor: chartColors.red,
-            pointBackgroundColor: chartColors.red,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }, {
-            label: "My Second dataset",
+            label: "",
             backgroundColor: color(chartColors.blue).alpha(0.2).rgbString(),
             borderColor: chartColors.blue,
             pointBackgroundColor: chartColors.blue,
             data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
+                <?php echo $aram ?>,
+                <?php echo $normal ?>,
+                <?php echo $rankedSoloDuo ?>,
+                <?php echo $ranked5v5 ?>,
             ]
-        }, ]
+        },
+        ]
     },
     options: {
         legend: {
