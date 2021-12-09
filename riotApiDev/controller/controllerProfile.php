@@ -1,6 +1,6 @@
 <?php
 $language = 'fr_FR';
-$partieNumber = 10;
+$partieNumber = 20;
 $server = $_GET['server'];
 $region = ModelRiotApi::getRegionByServer($server);
 $versionList = ModelRiotApi::getVersionData();

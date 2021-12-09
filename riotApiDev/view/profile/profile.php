@@ -98,6 +98,7 @@
             <div class="graphique1">
                 <canvas id="graph1"></canvas>
                 <?php require_once File::build_path(array("view","graph", "graph1.php")); ?>
+                <?php echo "<p class='winrateGraph'>" . $winRatio . "%</p>"; ?>
             </div>
             <div class="graphique2">
                 <canvas id="graph2"></canvas>

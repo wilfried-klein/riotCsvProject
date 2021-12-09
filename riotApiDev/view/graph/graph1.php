@@ -9,9 +9,10 @@ var data = {
     datasets: [{
         label: 'My First Dataset',
 
-        data: [<?php
-            echo $loses ?>, <?php
-            echo $wins ?>],
+        data: [
+            <?php echo $loses ?>,
+            <?php echo $wins ?>
+        ],
         backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)'
