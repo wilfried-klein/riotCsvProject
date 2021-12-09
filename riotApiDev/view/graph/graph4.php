@@ -27,146 +27,26 @@ var myChart = new Chart(ctx, {
                 <?php echo number_format($kdapergame[9], 2) ?>], //KDA
             backgroundColor: [
                 <?php
-                if(number_format($kdapergame[0], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[1], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[2], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[3], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[4], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[5], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[6], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[7], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[8], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[9], 2)==$highest){
-                    echo "'rgba(75, 192, 192, 0.2)'";
-                }else{
-                    echo "'rgba(255, 99, 132, 0.2)'";
+                foreach ($kdapergame as $kda){
+                    if(number_format($kda, 2)==$highest){
+                        echo "'rgba(75, 192, 192, 0.2)'";
+                    }else{
+                        echo "'rgba(255, 99, 132, 0.2)'";
+                    }
+                    echo ",";
                 }
                 ?>
 
             ],
             borderColor: [
                 <?php
-                if(number_format($kdapergame[0], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[1], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[2], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[3], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[4], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[5], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[6], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[7], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[8], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
-                }
-                ?>,
-                <?php
-                if(number_format($kdapergame[9], 2)==$highest){
-                    echo "'rgba(39, 253, 255, 1)'";
-                }else{
-                    echo "'rgba(255,99,132,1)'";
+                foreach ($kdapergame as $kda){
+                    if(number_format($kda, 2)==$highest){
+                        echo "'rgba(39, 253, 255, 1)'";
+                    }else{
+                        echo "'rgba(255,99,132,1)'";
+                    }
+                    echo ",";
                 }
                 ?>
             ],
