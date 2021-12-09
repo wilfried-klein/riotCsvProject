@@ -58,7 +58,7 @@ var config = {
         },
         title: {
             display: true,
-            text: 'Chart.js Radar Chart',
+            text: 'Classe de champion',
             fontColor: 'white'
         },
         scale: {
