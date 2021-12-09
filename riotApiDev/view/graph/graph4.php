@@ -1,3 +1,4 @@
+<script>
 var ctx = document.getElementById("graph4").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -84,3 +85,4 @@ document.getElementById("graph4").onclick = function (evt) {
     var value = myChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
     alert(label + ": " + value);
 };
+</script>

@@ -96,23 +96,23 @@
         <div class="graphs">
             <div class="graphique1">
                 <canvas id="graph1"></canvas>
-                <script src="js/graph1.js"></script>
+                <?php require_once File::build_path(array("view","graph", "graph1.php")); ?>
             </div>
             <div class="graphique2">
                 <canvas id="graph2"></canvas>
-                <script src="js/graph2.js"></script>
+                <?php require_once File::build_path(array("view","graph", "graph2.php")); ?>
             </div>
             <div class="graphique3">
                 <canvas id="graph3"></canvas>
-                <script src="js/graph3.js"></script>
+                <?php require_once File::build_path(array("view","graph", "graph3.php")); ?>
             </div>
             <div class="graphique4">
                 <canvas id="graph4"></canvas>
-                <script src="js/graph4.js"></script>
+                <?php require_once File::build_path(array("view","graph", "graph4.php")); ?>
             </div>
             <div class="graphique5">
                 <canvas id="graph5"></canvas>
-                <script src="js/graph5.js"></script>
+                <?php require_once File::build_path(array("view","graph", "graph5.php")); ?>
             </div>
         </div>
     </div>

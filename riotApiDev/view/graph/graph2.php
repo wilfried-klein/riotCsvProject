@@ -1,3 +1,4 @@
+<script>
 var randomScalingFactor = function() {
     return Math.round(Math.random() * 100);
 };
@@ -58,7 +59,7 @@ var config = {
         },
         title: {
             display: true,
-            text: 'Classe de champion',
+            text: 'Type de partie',
             fontColor: 'white'
         },
         scale: {
@@ -89,6 +90,5 @@ Chart.plugins.register({
     }
 })
 
-window.myRadar = new Chart(document.getElementById("graph3"), config);
-
-
+window.myRadar = new Chart(document.getElementById("graph2"), config);
+</script>

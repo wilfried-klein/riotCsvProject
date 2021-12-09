@@ -1,4 +1,5 @@
-var ctx = document.getElementById("graph5");
+<script>
+    var ctx = document.getElementById("graph5");
 
 var data = {
     labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
@@ -46,3 +47,4 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+</script>

@@ -1,3 +1,4 @@
+<script>
 var ctx = document.getElementById('graph1').getContext('2d');
 
 var data = {
@@ -31,5 +32,5 @@ var config = {
 };
 
 var graph1 = new Chart(ctx, config);
-
+</script>
 
