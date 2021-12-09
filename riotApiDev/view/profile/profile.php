@@ -83,8 +83,10 @@
                 <div class="lastGameInfo">
                     <table>
                         <?php
+                        $kdapergame = array();
                         foreach ($result as $value) {
                             require 'match.php';
+                            $kdapergame[]=($value['kills']+$value['assists'])/$value['deaths'];
                         }
                         ?>
                     </table>

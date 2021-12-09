@@ -1,54 +1,174 @@
+<?php
+$highest = number_format(max($kdapergame), 2);
+?>
 <script>
+
 var ctx = document.getElementById("graph4").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["Game 1", "Game 2", "Game 3", "Game 4", "Game 5", "Game 6", "Game 7", "Game 8", "Game 9", "Game 10"],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: "KDA",
+            pointBackgroundColor: chartColors.red,
+            data: [
+                <?php echo number_format($kdapergame[0], 2) ?>,
+                <?php echo number_format($kdapergame[1], 2) ?>,
+                <?php echo number_format($kdapergame[2], 2) ?>,
+                <?php echo number_format($kdapergame[3], 2) ?>,
+                <?php echo number_format($kdapergame[4], 2) ?>,
+                <?php echo number_format($kdapergame[5], 2) ?>,
+                <?php echo number_format($kdapergame[6], 2) ?>,
+                <?php echo number_format($kdapergame[7], 2) ?>,
+                <?php echo number_format($kdapergame[8], 2) ?>,
+                <?php echo number_format($kdapergame[9], 2) ?>], //KDA
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                <?php
+                if(number_format($kdapergame[0], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[1], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[2], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[3], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[4], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[5], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[6], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[7], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[8], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[9], 2)==$highest){
+                    echo "'rgba(75, 192, 192, 0.2)'";
+                }else{
+                    echo "'rgba(255, 99, 132, 0.2)'";
+                }
+                ?>
+
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                <?php
+                if(number_format($kdapergame[0], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[1], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[2], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[3], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[4], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[5], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[6], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[7], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[8], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>,
+                <?php
+                if(number_format($kdapergame[9], 2)==$highest){
+                    echo "'rgba(39, 253, 255, 1)'";
+                }else{
+                    echo "'rgba(255,99,132,1)'";
+                }
+                ?>
             ],
             borderWidth: 1
         },
-
-            {
-                label: '# of Votes2',
-                data: [24,38, 6, 10, 4, 6],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            },
-
-
         ]
     },
     options: {

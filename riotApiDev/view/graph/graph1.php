@@ -3,17 +3,18 @@ var ctx = document.getElementById('graph1').getContext('2d');
 
 var data = {
     labels: [
-        'Red',
-        'Blue',
-        'Yellow'
+        'Défaites',
+        'Victoires',
     ],
     datasets: [{
         label: 'My First Dataset',
-        data: [300, 50, 100],
+
+        data: [<?php
+            echo $loses ?>, <?php
+            echo $wins ?>],
         backgroundColor: [
             'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
+            'rgb(54, 162, 235)'
         ],
         hoverOffset: 4
     }]
