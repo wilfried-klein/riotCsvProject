@@ -86,7 +86,6 @@
                         $kdapergame = array();
                         foreach ($result as $value) {
                             require 'match.php';
-                            $kdapergame[]=($value['kills']+$value['assists'])/max(1,$value['deaths']);
                         }
                         ?>
                     </table>
