@@ -60,36 +60,20 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
     foreach ($summonerSpellData as $value) {
         if($value['key'] == $soloSummonerInfo['summoner1Id']){
             $result[$nbG]['summonerSpell1'] = ModelRiotApi::getSummonerSpellAsset($matchVersion,$value['image']['full']);
+            break;
         }
     }
     foreach ($summonerSpellData as $value) {
         if($value['key'] == $soloSummonerInfo['summoner2Id']){
             $result[$nbG]['summonerSpell2'] = ModelRiotApi::getSummonerSpellAsset($matchVersion,$value['image']['full']);
+            break;
         }
     }
     $rune1 = $soloSummonerInfo['perks']['styles'][0]['selections'][0]['perk'];
     $branch = $soloSummonerInfo['perks']['styles'][0]['style'];
-    for ($i=0; $i < count($runeData); $i++) {
-        if($runeData[$i]['id'] == $branch){
-            $subRuneData = $runeData[$i]['slots'];
-            for ($h=0; $h < count($subRuneData) ; $h++) {
-                $array = $subRuneData[$h]['runes'];
-                for ($j=0; $j < count($array); $j++) {
-                    if($array[$j]['id'] == $rune1){
-                        $result[$nbG]['rune1Icon'] = ModelRiotApi::getRunesAsset($array[$j]['icon']);
-                        break(3);
-                    }
-                }
-            }
-        }
-    }
+    $result[$nbG]['rune1Icon'] = Util::getRuneICon($rune1,$branch);
     $rune2 = $soloSummonerInfo['perks']['styles'][1]['style'];
-    for ($i=0; $i < count($runeData); $i++) {
-        if($runeData[$i]['id'] == $rune2){
-            $result[$nbG]['rune2Icon'] = ModelRiotApi::getRunesAsset($runeData[$i]['icon']);
-            break;
-        }
-    }
+    $result[$nbG]['rune2Icon'] = Util::getBranchIcon($rune2);
     if(array_key_exists('gameEndTimestamp',$matchData['info'])){
         $result[$nbG]['gameDuration'] = $matchData['info']['gameDuration'];
         $result[$nbG]['gameDurationMinAndSec'] = msInMinAndSec($matchData['info']['gameDuration']);
