@@ -10,31 +10,24 @@ var ctx = document.getElementById("graph4").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Game 1", "Game 2", "Game 3", "Game 4", "Game 5", "Game 6", "Game 7", "Game 8", "Game 9", "Game 10", "Game 11", "Game 12", "Game 13", "Game 14", "Game 15", "Game 16", "Game 17", "Game 18", "Game 19", "Game 20"],
+        labels: [
+            <?php
+                for ($i=1 ; $i<=count($result) ; $i++) {
+                    echo "\"" . "Game " . $i . "\"" ;
+                    echo ",";
+                }
+            ?>
+        ],
         datasets: [{
             label: "KDA",
             pointBackgroundColor: chartColors.red,
             data: [
-                <?php echo number_format($kdapergame[0], 2) ?>,
-                <?php echo number_format($kdapergame[1], 2) ?>,
-                <?php echo number_format($kdapergame[2], 2) ?>,
-                <?php echo number_format($kdapergame[3], 2) ?>,
-                <?php echo number_format($kdapergame[4], 2) ?>,
-                <?php echo number_format($kdapergame[5], 2) ?>,
-                <?php echo number_format($kdapergame[6], 2) ?>,
-                <?php echo number_format($kdapergame[7], 2) ?>,
-                <?php echo number_format($kdapergame[8], 2) ?>,
-                <?php echo number_format($kdapergame[9], 2) ?>,
-                <?php echo number_format($kdapergame[10], 2) ?>,
-                <?php echo number_format($kdapergame[11], 2) ?>,
-                <?php echo number_format($kdapergame[12], 2) ?>,
-                <?php echo number_format($kdapergame[13], 2) ?>,
-                <?php echo number_format($kdapergame[14], 2) ?>,
-                <?php echo number_format($kdapergame[15], 2) ?>,
-                <?php echo number_format($kdapergame[16], 2) ?>,
-                <?php echo number_format($kdapergame[17], 2) ?>,
-                <?php echo number_format($kdapergame[18], 2) ?>,
-                <?php echo number_format($kdapergame[19], 2) ?>
+                <?php
+                    foreach ($kdapergame as $kda) {
+                        echo number_format($kda, 2);
+                        echo ",";
+                    }
+                ?>
             ],
             backgroundColor: [
                 <?php
