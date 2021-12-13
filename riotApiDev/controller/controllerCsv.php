@@ -38,12 +38,13 @@ class ControllerCsv{
 		$return["summoner2Id"] = Util::getSummonerSpellName($return["summoner2Id"]);
 	//ajout de l'id du match, du timestamp, de sa durée, le timeStamp
 		$return['matchId'] = $matchID;
+		$return['timePlayed'] = number_format($return['timePlayed']/60,3);
 		$return['gameStartTimestamp'] = $matchData['info']['gameCreation'];
 		if(array_key_exists('gameEndTimestamp', $matchData['info'])){
-			$return['gameDuration'] = $matchData['info']['gameDuration'];
+			$return['gameDuration'] = number_format($matchData['info']['gameDuration']/60,3);
 			$return['gameEndTimestamp'] = $matchData['info']['gameEndTimestamp'];
 		}else{
-			$return['gameDuration'] = $matchData['info']['gameDuration']/1000;
+			$return['gameDuration'] = number_format($matchData['info']['gameDuration']/60000,3);
 			$return['gameEndTimestamp'] = -1;
 		}
         //filtrage des données du match
@@ -52,6 +53,7 @@ class ControllerCsv{
 		$return = Util::convertBoolean($return);
 		return $return;
 	}
+
 
 	public static function arrayToCsvStream($array){
 		$csvContent = "";
