@@ -31,85 +31,92 @@ class Util{
 	/*list example : $list = array(
 								'kills' => 'Éliminations',
 								'killingSpree' => 'Série d\'éliminations'
-									);*/
-	public static function multiChangeColumnName($array,$list){
-		foreach ($list as $oldName => $newName) {
-			$array = Util::changeColumnName($array,$oldName,$newName);
-		}
-		return $array;
-	}
-	public static function convertBoolean($array){
-		foreach($array as $key => $value){
-			if(gettype($array[$key]) ==="boolean"){
-				if($value){
-					$array[$key] = "1";
-				}else{
-					$array[$key] = "0";
-				}
-			}
-		}
-		return $array;
-	}
-	public static function getObjectName($objectId){
-		if(Util::$version == null){
-			Util::$version = ModelRiotApi::getVersionData()[0];
-		}
-		if(Util::$objectData == null){
-			Util::$objectData = ModelRiotApi::getItemsData(Util::$version,"fr_FR");
-		}
-		foreach (Util::$objectData['data'] as $key => $itemData) {
-			if($key == $objectId){
-				return $itemData['name'];
-			}
-		}
-	}
-	public static function getSummonerSpellName($summonerSpellId){
-		if(Util::$version == null){
-			Util::$version = ModelRiotApi::getVersionData()[0];
-		}
-		if(Util::$summonerSpellData == null){
-			Util::$summonerSpellData = ModelRiotApi::getSummonerSpellsData(ModelRiotApi::getVersionData()[0],"fr_FR");
-		}
-		foreach (Util::$summonerSpellData['data'] as $value) {
-			if($value['key'] == $summonerSpellId){
-			return $value['name'];
-			}
-		}
-	}
-	public static function getRuneIcon($runeName,$branch){
-		if(Util::$version == null){
-			Util::$version = ModelRiotApi::getVersionData()[0];
-		}
-		if(Util::$runeData == null){
-			Util::$runeData = ModelRiotApi::getRunesData(Util::$version,'fr_FR');
-		}
-		for ($i=0; $i < count(Util::$runeData); $i++) {
-	        if(Util::$runeData[$i]['id'] == $branch){
-	            $subRuneData = Util::$runeData[$i]['slots'];
-	            for ($h=0; $h < count($subRuneData) ; $h++) {
-	                $array = $subRuneData[$h]['runes'];
-	                for ($j=0; $j < count($array); $j++) {
-	                    if($array[$j]['id'] == $runeName){
-	                        return ModelRiotApi::getRunesAsset($array[$j]['icon']);
-	                    }
-	                }
-	            }
-	        }
-		}
-	}
-	public static function getBranchIcon($branchName){
-		if(Util::$version == null){
-			Util::$version = ModelRiotApi::getVersionData()[0];
-		}
-		if(Util::$runeData == null){
-			Util::$runeData = ModelRiotApi::getRunesData(Util::$version,'fr_FR');
-		}
-		for ($i=0; $i < count(Util::$runeData); $i++) {
-        	if(Util::$runeData[$i]['id'] == $branchName){
-            	return ModelRiotApi::getRunesAsset(Util::$runeData[$i]['icon']);
-        	}
-    	}	
-	}
-}
+							);*/
+							public static function multiChangeColumnName($array,$list){
+								foreach ($list as $oldName => $newName) {
+									$array = Util::changeColumnName($array,$oldName,$newName);
+								}
+								return $array;
+							}
+							public static function convertBoolean($array){
+								foreach($array as $key => $value){
+									if(gettype($array[$key]) ==="boolean"){
+										if($value){
+											$array[$key] = "1";
+										}else{
+											$array[$key] = "0";
+										}
+									}
+								}
+								return $array;
+							}
+							public static function getObjectName($objectId){
+								if(Util::$version == null){
+									Util::$version = ModelRiotApi::getVersionData()[0];
+								}
+								if(Util::$objectData == null){
+									Util::$objectData = ModelRiotApi::getItemsData(Util::$version,"fr_FR");
+								}
+								foreach (Util::$objectData['data'] as $key => $itemData) {
+									if($key == $objectId){
+										return $itemData['name'];
+									}
+								}
+							}
+							public static function getSummonerSpellName($summonerSpellId){
+								if(Util::$version == null){
+									Util::$version = ModelRiotApi::getVersionData()[0];
+								}
+								if(Util::$summonerSpellData == null){
+									Util::$summonerSpellData = ModelRiotApi::getSummonerSpellsData(ModelRiotApi::getVersionData()[0],"fr_FR");
+								}
+								foreach (Util::$summonerSpellData['data'] as $value) {
+									if($value['key'] == $summonerSpellId){
+										return $value['name'];
+									}
+								}
+							}
+							public static function getRuneIcon($runeName,$branch){
+								if(Util::$version == null){
+									Util::$version = ModelRiotApi::getVersionData()[0];
+								}
+								if(Util::$runeData == null){
+									Util::$runeData = ModelRiotApi::getRunesData(Util::$version,'fr_FR');
+								}
+								for ($i=0; $i < count(Util::$runeData); $i++) {
+									if(Util::$runeData[$i]['id'] == $branch){
+										$subRuneData = Util::$runeData[$i]['slots'];
+										for ($h=0; $h < count($subRuneData) ; $h++) {
+											$array = $subRuneData[$h]['runes'];
+											for ($j=0; $j < count($array); $j++) {
+												if($array[$j]['id'] == $runeName){
+													return ModelRiotApi::getRunesAsset($array[$j]['icon']);
+												}
+											}
+										}
+									}
+								}
+							}
+							public static function getBranchIcon($branchName){
+								if(Util::$version == null){
+									Util::$version = ModelRiotApi::getVersionData()[0];
+								}
+								if(Util::$runeData == null){
+									Util::$runeData = ModelRiotApi::getRunesData(Util::$version,'fr_FR');
+								}
+								for ($i=0; $i < count(Util::$runeData); $i++) {
+									if(Util::$runeData[$i]['id'] == $branchName){
+										return ModelRiotApi::getRunesAsset(Util::$runeData[$i]['icon']);
+									}
+								}	
+							}
+							public static function msInMinAndSec($secondes,$format){
+								$minutes = floor($secondes / 60);
+								$secondes = $secondes % 60;
+								$minutes = $minutes % 60;
+								$time = sprintf($format, $minutes, $secondes);
+								return $time;
+							}
+						}
 
-?>
+					?>

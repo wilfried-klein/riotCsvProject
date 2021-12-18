@@ -76,10 +76,10 @@ for($nbG=0; $nbG < $matchAnalysedNumber;$nbG++) {
     $result[$nbG]['rune2Icon'] = Util::getBranchIcon($rune2);
     if(array_key_exists('gameEndTimestamp',$matchData['info'])){
         $result[$nbG]['gameDuration'] = $matchData['info']['gameDuration'];
-        $result[$nbG]['gameDurationMinAndSec'] = msInMinAndSec($matchData['info']['gameDuration']);
+        $result[$nbG]['gameDurationMinAndSec'] = Util::msInMinAndSec($matchData['info']['gameDuration'],'%u Min %02u');
     }else{
         $result[$nbG]['gameDuration'] = $matchData['info']['gameDuration']/1000;
-        $result[$nbG]['gameDurationMinAndSec'] = msInMinAndSec($matchData['info']['gameDuration']/1000);
+        $result[$nbG]['gameDurationMinAndSec'] = Util::msInMinAndSec($matchData['info']['gameDuration']/1000,'%u Min %02u');
     }
     foreach ($queueData as $value) {
         if($value['queueId'] == $matchData['info']['queueId']) {
@@ -125,7 +125,7 @@ if($matchAnalysedNumber > 0){
     $average['averageKills'] = number_format($average['averageKills']/$matchAnalysedNumber, 2);
     $average['averageDeaths'] = number_format($average['averageDeaths']/$matchAnalysedNumber, 2);
     $average['averageGolds'] = floor($average['averageGolds']/$matchAnalysedNumber);
-    $average['averageDuration'] = msInMinAndSec($average['averageDuration']/$matchAnalysedNumber);
+    $average['averageDuration'] = Util::msInMinAndSec($average['averageDuration']/$matchAnalysedNumber,'%u Min %02u');
     $counts = array_count_values($favoriteRole);
     arsort($counts);
     if (!function_exists('array_key_first')) {
@@ -155,12 +155,5 @@ if($matchAnalysedNumber > 0){
 }else{
     $average = -1;
 }
-function msInMinAndSec($secondes){
-    $minutes = floor($secondes / 60);
-    $secondes = $secondes % 60;
-    $minutes = $minutes % 60;
-    $format = '%u Min %02u';
-    $time = sprintf($format, $minutes, $secondes);
-    return $time;
-}
+
 ?>

@@ -1,70 +1,81 @@
-<script>
-var randomScalingFactor = function() {
-    return Math.round(Math.random() * 100);
-};
-var chartColors = {
-    red: 'rgb(255, 99, 132)',
-    orange: 'rgb(255, 159, 64)',
-    yellow: 'rgb(255, 205, 86)',
-    green: 'rgb(75, 192, 192)',
-    blue: 'rgb(54, 162, 235)',
-    purple: 'rgb(153, 102, 255)',
-    grey: 'rgb(231,233,237)'
-};
+<?php
+$addARAM = 0;
+$roles = array(
+    "TOP" => 0,
+    "JUNGLE" => 0,
+    "MIDDLE" => 0,
+    "BOTTOM" => 0,
+    "UTILITY" => 0,
+    "ARAM" => 0
+);
+foreach ($result as $value) {
+    if($value['role'] != null){
+        ++$roles[$value['role']]; 
+    }else{
+        $addARAM = 1;
+        ++$roles['ARAM'];
+    }
+}
 
-var color = Chart.helpers.color;
-var config = {
-    type: 'radar',
-    data: {
-        labels: [
-            ["Eating", "Dinner"],
-            ["Drinking", "Water"], "Sleeping", ["Designing", "Graphics"], "Coding", "Cycling", "Running"
-        ],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: color(chartColors.red).alpha(0.2).rgbString(),
-            borderColor: chartColors.red,
-            pointBackgroundColor: chartColors.red,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }, {
-            label: "My Second dataset",
-            backgroundColor: color(chartColors.blue).alpha(0.2).rgbString(),
-            borderColor: chartColors.blue,
-            pointBackgroundColor: chartColors.blue,
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ]
-        }, ]
-    },
-    options: {
-        legend: {
-            position: 'top',
-            labels: {
-                fontColor: 'white'
+?>
+
+
+
+<script>
+    var randomScalingFactor = function() {
+        return Math.round(Math.random() * 100);
+    };
+    var chartColors = {
+        red: 'rgb(255, 99, 132)',
+        orange: 'rgb(255, 159, 64)',
+        yellow: 'rgb(255, 205, 86)',
+        green: 'rgb(75, 192, 192)',
+        blue: 'rgb(54, 162, 235)',
+        purple: 'rgb(153, 102, 255)',
+        grey: 'rgb(231,233,237)'
+    };
+
+    var color = Chart.helpers.color;
+    var config = {
+        type: 'radar',
+        data: {
+            labels: [
+            "TOP","JUNGLE","MID","ADC","SUPPORT"
+            <?php
+            if($addARAM == 1){
+                echo ",".'"ARAM"';
             }
+            ?>
+            ],
+            datasets: [{
+                label: "Rôle",
+                backgroundColor: color(chartColors.blue).alpha(0.2).rgbString(),
+                borderColor: chartColors.blue,
+                pointBackgroundColor: chartColors.blue,
+                data: [
+                <?php
+                    foreach ($roles as $value) {
+                        echo "$value,";
+                    }
+                ?>
+                ]
+            }, ]
         },
-        title: {
-            display: true,
-            text: 'Classe de champion',
-            fontColor: 'white'
-        },
-        scale: {
-            ticks: {
-                beginAtZero: true,
+        options: {
+            legend: {
+                position: 'top',
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            title: {
+                display: true,
+                text: 'Rôle',
+                fontColor: 'white'
+            },
+            scale: {
+                ticks: {
+                    beginAtZero: true,
                 fontColor: 'white', // labels such as 10, 20, etc
                 showLabelBackdrop: false // hide square behind text
             },

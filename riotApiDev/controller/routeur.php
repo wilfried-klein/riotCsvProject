@@ -44,7 +44,11 @@ class Routeur{
 			if(!isset($_GET['summonerPuuid']) || !isset($_GET['queue']) || !isset($_GET['region']) || !isset($_GET['gameNumber'])){
 				throw new Exception("MissingArgument");
 			}else{
+				$list = array(400,420,450,440);
 				$queue = $_GET['queue'];
+				if(!array_search($queue,$list)){
+					die();
+				}
 				$summonerPuuid = $_GET['summonerPuuid'];
 				$region = $_GET['region'];
 				$gameNumber = $_GET['gameNumber'];
