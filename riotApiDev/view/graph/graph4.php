@@ -74,17 +74,11 @@ var myChart = new Chart(ctx, {
     },
 
 
-
     onClick:function(e){
-        /*var activePoints = myChart.getElementsAtEvent(e);
-        var selectedIndex = activePoints[0]._index; */
-        /* alert(this.data.datasets[0].data[selectedIndex]);
-        console.log(this.data.datasets[0].data[selectedIndex]);
-        */
+
     }
 });
 
-/* https://github.com/chartjs/Chart.js/issues/2292 */
 document.getElementById("graph4").onclick = function (evt) {
     var activePoints = myChart.getElementsAtEventForMode(evt, 'point', myChart.options);
     var firstPoint = activePoints[0];
