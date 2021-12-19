@@ -65,7 +65,13 @@ var myChart = new Chart(ctx, {
             fontColor: 'white'
         },
         scales: {
+            angleLines: {
+                color: 'white'
+            },
             yAxes: [{
+                gridLines: {
+                    color: 'rgba(255, 255, 255, 0.2)'
+                },
                 ticks: {
                     beginAtZero:true
                 }

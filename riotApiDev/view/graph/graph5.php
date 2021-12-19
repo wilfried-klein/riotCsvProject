@@ -1,4 +1,9 @@
 <script>
+
+    var chartColors = {
+        blue: 'rgb(54, 162, 235)'
+    };
+
     var ctx = document.getElementById("graph5");
 
     var data = {
@@ -15,17 +20,16 @@
             label: "Durée de la partie",
             fill: false,
             lineTension: 0,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
+            borderColor: chartColors.blue,
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#000",
+            pointBorderColor: chartColors.blue,
+            pointBackgroundColor: chartColors.blue,
             pointBorderWidth: 5,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBackgroundColor: chartColors.blue,
             pointHoverBorderColor: "rgba(220,220,220,1)",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
@@ -54,6 +58,9 @@
             },
             scales: {
                 yAxes: [{
+                    gridLines: {
+                        color: 'rgba(255, 255, 255, 0.2)'
+                    },
                     ticks: {
                         beginAtZero:true
                     }
